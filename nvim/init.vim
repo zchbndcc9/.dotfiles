@@ -5,7 +5,6 @@ let g:lightline = { 'colorscheme': 'jellybeans' }
 
 let g:closetag_filenames= '*.html, *.xhtml, *.xml, *.js, *.jsx'
 
-
 " Coc
 au BufRead,BufNewFile *.sbt set filetype=scala
 
