@@ -17,8 +17,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
   " Elixir / Phoenix
-	Plug 'elixir-editors/vim-elixir'
-	Plug 'mattreduce/vim-mix'
+  Plug 'elixir-editors/vim-elixir'
+  Plug 'mattreduce/vim-mix'
 	Plug 'BjRo/vim-extest'
 	Plug 'frost/vim-eh-docs'
 	Plug 'slashmili/alchemist.vim'
