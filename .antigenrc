@@ -1,0 +1,14 @@
+antigen use oh-my-zsh
+
+antigen bundle thefuck
+antigen bundle docker
+antigen bundle docker-compose
+antigen bundle git
+antigen bundle zsh-256color
+antigen bundle zdharma/fast-syntax-highlighting
+antigen bundle colorize 
+antigen bundle fzf
+
+antigen theme https://github.com/caiogondim/bullet-train-oh-my-zsh-theme bullet-train
+
+antigen apply
