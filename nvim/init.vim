@@ -1,6 +1,7 @@
 " Plugs
 source $HOME/.dotfiles/nvim/plugs.vim
 
+let g:deoplete#enable_at_startup = 1
 let g:lightline = { 'colorscheme': 'jellybeans' }
 
 let g:closetag_filenames= '*.html, *.xhtml, *.xml, *.js, *.jsx'
