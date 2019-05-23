@@ -31,7 +31,8 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'roxma/nvim-yarp'
     Plug 'roxma/vim-hug-neovim-rpc'
   endif
-  Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
+  Plug 'w0rp/ale'
+  Plug 'carlitux/deoplete-ternjs', { 'do': 'yarn add -g tern' }
   Plug 'airblade/vim-gitgutter'
   Plug 'jiangmiao/auto-pairs'
   Plug 'tpope/vim-surround'
