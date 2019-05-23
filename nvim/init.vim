@@ -1,13 +1,22 @@
 " Plugs
 source $HOME/.dotfiles/nvim/plugs.vim
 
+au BufRead,BufNewFile *.sbt set filetype=scala
+
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources = {'_': ['ale']}
+
+" Ale
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+\  'javascript': ['prettier', 'eslint'],
+\  'javascript.jsx': ['prettier', 'eslint'],
+\ }
+
 let g:lightline = { 'colorscheme': 'jellybeans' }
 
 let g:closetag_filenames= '*.html, *.xhtml, *.xml, *.js, *.jsx'
 
-" Coc
-au BufRead,BufNewFile *.sbt set filetype=scala
 
 " GitGutter config
 set updatetime=100 
