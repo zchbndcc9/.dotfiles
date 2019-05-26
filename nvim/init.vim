@@ -13,7 +13,8 @@ let g:ale_fixers = {
 \  'javascript.jsx': ['prettier', 'eslint'],
 \ }
 
-let g:lightline = { 'colorscheme': 'jellybeans' }
+" Airline config
+let g:airline_theme='dracula'
 
 let g:closetag_filenames= '*.html, *.xhtml, *.xml, *.js, *.jsx'
 
