@@ -15,6 +15,7 @@ let g:ale_fixers = {
 
 " Airline config
 let g:airline_theme='dracula'
+let g:airline#extensions#tabline#enabled = 1
 
 let g:closetag_filenames= '*.html, *.xhtml, *.xml, *.js, *.jsx'
 
