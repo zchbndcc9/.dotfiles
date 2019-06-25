@@ -1,7 +1,6 @@
 call plug#begin('~/.local/share/nvim/plugged')
   " Scala
   Plug 'derekwyatt/vim-scala'
-  Plug 'ensime/ensime-vim', { 'do': ':UpdateRemotePlugins' }
   
   " C++
   Plug 'octol/vim-cpp-enhanced-highlight'
