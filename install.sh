@@ -1,3 +1,7 @@
+echo "Setting up install..."
+sudo rm /usr/bin/emacs
+sudo rm -rf /usr/share/emacs
+
 echo "Installing homebrew..."
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
