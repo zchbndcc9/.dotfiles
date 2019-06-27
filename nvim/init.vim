@@ -19,7 +19,6 @@ let g:airline#extensions#tabline#enabled = 1
 
 let g:closetag_filenames= '*.html, *.xhtml, *.xml, *.js, *.jsx'
 
-
 " GitGutter config
 set updatetime=100 
 highlight GitGutterAdd    guifg=#009900
@@ -46,3 +45,9 @@ set expandtab
 set number
 set enc=utf-8
 set fileencoding=utf-8
+set mouse=a
+
+"folding settings
+set foldmethod=indent
+set nofoldenable
+set foldlevel=1

@@ -22,6 +22,9 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'jadercorrea/elixir_generator.vim'
   Plug 'mhinz/vim-mix-format'
 
+  " YAML
+  Plug 'stephpy/vim-yaml'
+  
   " Utilities
   if has('nvim')
     Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
