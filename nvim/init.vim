@@ -3,9 +3,6 @@ source $HOME/.dotfiles/nvim/plugs.vim
 
 au BufRead,BufNewFile *.sbt set filetype=scala
 
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources = {'_': ['ale']}
-
 " Ale
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {

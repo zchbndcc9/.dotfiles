@@ -26,15 +26,9 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'stephpy/vim-yaml'
   
   " Utilities
-  if has('nvim')
-    Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
-  else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-  endif
+  Plug '/usr/local/opt/fzf'
+  Plug 'junegunn/fzf.vim'
   Plug 'w0rp/ale'
-  Plug 'carlitux/deoplete-ternjs', { 'do': 'yarn add -g tern' }
   Plug 'airblade/vim-gitgutter'
   Plug 'jiangmiao/auto-pairs'
   Plug 'tpope/vim-surround'
