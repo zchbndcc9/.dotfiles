@@ -3,11 +3,15 @@ source $HOME/.dotfiles/nvim/plugs.vim
 
 au BufRead,BufNewFile *.sbt set filetype=scala
 
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+
 " Ale
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
 \  'javascript': ['prettier', 'eslint'],
 \  'javascript.jsx': ['prettier', 'eslint'],
+\  'python': ['flake8', 'pylint']
 \ }
 
 " Airline config

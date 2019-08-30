@@ -9,8 +9,12 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'alvan/vim-closetag'
   
   " Javascript/React
+  Plug 'othree/yajs.vim'
   Plug 'mxw/vim-jsx'
   Plug 'pangloss/vim-Javascript'
+
+  " Python
+  Plug 'vim-scripts/indentpython.vim' 
 
   " Go
   Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
@@ -26,6 +30,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'stephpy/vim-yaml'
   
   " Utilities
+  Plug 'Valloric/YouCompleteMe'
   Plug '/usr/local/opt/fzf'
   Plug 'junegunn/fzf.vim'
   Plug 'w0rp/ale'
