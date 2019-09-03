@@ -48,6 +48,12 @@ set enc=utf-8
 set fileencoding=utf-8
 set mouse=a
 
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
+
 "folding settings
 set foldmethod=indent
 set nofoldenable

@@ -22,9 +22,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Elixir / Phoenix
   Plug 'slashmili/alchemist.vim'
   Plug 'elixir-editors/vim-elixir'
-  Plug 'frost/vim-eh-docs'
-  Plug 'jadercorrea/elixir_generator.vim'
   Plug 'mhinz/vim-mix-format'
+  Plug 'andyl/vim-textobj-elixir'
 
   " YAML
   Plug 'stephpy/vim-yaml'
@@ -34,6 +33,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug '/usr/local/opt/fzf'
   Plug 'junegunn/fzf.vim'
   Plug 'w0rp/ale'
+  Plug 'kana/vim-textobj-user'
   Plug 'airblade/vim-gitgutter'
   Plug 'jiangmiao/auto-pairs'
   Plug 'tpope/vim-surround'
