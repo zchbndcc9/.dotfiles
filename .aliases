@@ -1,1 +1,2 @@
 alias db="dotbare"
+alias dbc="db commit"
