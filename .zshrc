@@ -2,6 +2,7 @@ export EDITOR="nvim"
 export VISUAL="$EDITOR"
 
 export TERM="xterm-256color"
+source $HOME/.aliases
 alias tmux="tmux -2"
 
 if [ "$TMUX" = "" ]; then 
@@ -20,20 +21,16 @@ if type brew &>/dev/null; then
   compinit
 fi
 
-
 #---Plugins (Antibody)---
 source <(antibody init)
 antibody bundle < ~/.zsh_plugins.txt
+
+export FZF_DEFAULT_COMMAND='ag -g ""'
 
 setopt correct
 setopt autocd
 setopt globdots
 setopt histignoredups
-
-# Nvm setup
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
