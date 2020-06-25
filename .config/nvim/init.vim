@@ -1,0 +1,1 @@
+/Users/zach/.dotfiles/nvim/init.vim
