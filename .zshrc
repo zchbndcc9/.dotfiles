@@ -21,9 +21,16 @@ if type brew &>/dev/null; then
   compinit
 fi
 
+# Key binding config
+bindkey -v
+
 #---Plugins (Antibody)---
-source <(antibody init)
-antibody bundle < ~/.zsh_plugins.txt
+# If static antibody plugin file doesn't exist, create it
+if [[ ! -a ~/.zsh_plugins.sh ]]; then
+  abundle;
+fi
+
+source ~/.zsh_plugins.sh
 
 export FZF_DEFAULT_COMMAND='ag -g ""'
 

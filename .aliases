@@ -1,2 +1,3 @@
 alias db="dotbare"
 alias dbc="db commit"
+alias abundle="antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh"
