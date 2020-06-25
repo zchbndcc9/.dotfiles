@@ -1,0 +1,27 @@
+# Dotfile configuration :)
+kazhala/dotbare
+
+# Git goodies
+wfxr/forgit
+elstgav/branch-manager
+ytakahashi/igit
+cameronbroe/whobrokemycode
+
+# Colors
+gretzky/auto-color-ls
+chrissicool/zsh-256color
+zdharma/fast-syntax-highlighting
+
+molovo/tipz
+laggardkernel/zsh-thefuck
+Aloxaf/fzf-tab
+walesmd/caniuse.plugin.zsh
+wting/autojump
+marlonrichert/zsh-autocomplete
+Cloudstek/zsh-plugin-appup
+# MikeDacre/careful_rm
+zsh-users/zsh-completions
+zsh-users/zsh-autosuggestions
+
+yardnsm/blox-zsh-theme
+# caiogondim/bullet-train-oh-my-zsh-theme bullet-train
