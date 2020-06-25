@@ -17,11 +17,10 @@ laggardkernel/zsh-thefuck
 Aloxaf/fzf-tab
 walesmd/caniuse.plugin.zsh
 wting/autojump
-marlonrichert/zsh-autocomplete
 Cloudstek/zsh-plugin-appup
-# MikeDacre/careful_rm
 zsh-users/zsh-completions
 zsh-users/zsh-autosuggestions
+softmoth/zsh-vim-mode
 
 yardnsm/blox-zsh-theme
 # caiogondim/bullet-train-oh-my-zsh-theme bullet-train
