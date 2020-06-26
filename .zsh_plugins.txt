@@ -8,10 +8,9 @@ ytakahashi/igit
 cameronbroe/whobrokemycode
 
 # Colors
-gretzky/auto-color-ls
 chrissicool/zsh-256color
 zdharma/fast-syntax-highlighting
-
+ 
 molovo/tipz
 laggardkernel/zsh-thefuck
 Aloxaf/fzf-tab
