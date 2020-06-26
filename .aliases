@@ -1,3 +1,9 @@
 alias db="dotbare"
 alias dbc="db commit"
 alias abundle="antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh"
+alias leaftree="brew leaves | xargs brew deps --tree"
+
+alias ls="ls -G"
+alias ll="ls -l"
+alias la="ls -a"
+alias lla="la -l"
