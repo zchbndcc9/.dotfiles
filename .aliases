@@ -3,7 +3,10 @@ alias dbc="db commit"
 alias abundle="antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh"
 alias leaftree="brew leaves | xargs brew deps --tree"
 
+alias jtags="ctags -R --exclude=node_modules --exclude=.git"
 alias ls="ls -G"
 alias ll="ls -l"
 alias la="ls -a"
 alias lla="la -l"
+
+alias gs="git status"

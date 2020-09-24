@@ -19,7 +19,7 @@ wting/autojump
 Cloudstek/zsh-plugin-appup
 zsh-users/zsh-completions
 zsh-users/zsh-autosuggestions
-softmoth/zsh-vim-mode
+softmoth/zsh-vim-mode 
 
 yardnsm/blox-zsh-theme
 # caiogondim/bullet-train-oh-my-zsh-theme bullet-train
