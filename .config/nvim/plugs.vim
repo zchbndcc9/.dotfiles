@@ -1,9 +1,12 @@
 call plug#begin('~/.local/share/nvim/plugged')
+
   " HTML
   Plug 'alvan/vim-closetag'
   
   " Javascript/React
   Plug 'othree/yajs.vim'
+  Plug 'othree/javascript-libraries-syntax.vim'
+  Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
 
   " Python
   Plug 'vim-scripts/indentpython.vim' 
@@ -46,12 +49,15 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'tpope/vim-repeat'
   Plug 'ryanoasis/vim-devicons'
 
+  Plug 'ludovicchabant/vim-gutentags'
+
   " Git
   Plug 'airblade/vim-gitgutter'
   Plug 'tpope/vim-fugitive' 
 
   " Colorschemes
   Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+  Plug 'sainnhe/forest-night'
   Plug 'NLKNguyen/papercolor-theme'
   Plug 'connorholyday/vim-snazzy'
   Plug 'kyoz/purify', { 'rtp': 'vim' }

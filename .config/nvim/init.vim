@@ -4,9 +4,15 @@ source $HOME/.config/nvim/plugs.vim
 " Deoplete
 let g:deoplete#enable_at_startup = 1
 let g:neosnippet#enable_completed_snippet = 1
+let g:loaded_python_provider = 0
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" Gutentags
+let g:gutentags_define_advanced_commands = 1
+set statusline+=%{gutentags#statusline()}
+set wildignore+=*node_modules/**
 
 " Language Server Stuff
 let g:LanguageClient_serverCommands = {
@@ -20,6 +26,8 @@ let g:ale_linters = {
 
 let g:ale_fixers = {
 \  'javascript': ['prettier', 'eslint'],
+\  'typescript': ['prettier', 'eslint'],
+\  'typescriptreact': ['prettier', 'eslint'],
 \  'javascript.jsx': ['prettier', 'eslint'],
 \  'python': ['flake8', 'pylint'],
 \  'elixir': ['mix_format']
@@ -118,5 +126,7 @@ if &term =~ '^screen'
   execute "set <xLeft>=\e[1;*D"
 endif
 syntax on
+
 set termguicolors
-colorscheme dracula
+
+colorscheme forest-night
