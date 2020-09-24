@@ -11,7 +11,6 @@ fi
 
 # Colorls configuration (Must be done befor plugins loaded)
 . $(brew --prefix asdf)/asdf.sh
-source $(dirname $(gem which colorls))/tab_complete.sh
 
 # Auto completion 
 if type brew &>/dev/null; then
@@ -27,7 +26,9 @@ bindkey -v
 #---Plugins (Antibody)---
 # If static antibody plugin file doesn't exist, create it
 if [[ ! -a ~/.zsh_plugins.sh ]]; then
+  echo -e 'Creating static antibody bundle...'
   abundle;
+  echo -e 'All set'
 fi
 
 source ~/.zsh_plugins.sh
