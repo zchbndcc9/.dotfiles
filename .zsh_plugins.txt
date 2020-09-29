@@ -11,6 +11,7 @@ cameronbroe/whobrokemycode
 chrissicool/zsh-256color
 zdharma/fast-syntax-highlighting
  
+softmoth/zsh-vim-mode
 molovo/tipz
 laggardkernel/zsh-thefuck
 Aloxaf/fzf-tab
