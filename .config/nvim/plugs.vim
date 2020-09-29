@@ -19,12 +19,26 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'scrooloose/nerdtree'
   Plug 'Xuyuanp/nerdtree-git-plugin'
   
-  " Deoplete
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'wokalski/autocomplete-flow'
-  Plug 'Shougo/neosnippet'
-  Plug 'Shougo/neosnippet-snippets'
+  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  " Plug 'wokalski/autocomplete-flow'
+  " Plug 'Shougo/neosnippet'
   
+  " Neosnippet
+  Plug 'Shougo/neosnippet-snippets'
+  Plug 'Shougo/neosnippet'
+  
+  " Autocomplete
+  Plug 'ncm2/ncm2'
+  Plug 'roxma/nvim-yarp'
+  Plug 'ncm2/ncm2-path'
+  Plug 'ncm2/ncm2-gtags'
+  Plug 'ncm2/ncm2-syntax'
+  Plug 'Shougo/neco-syntax'
+  Plug 'ncm2/ncm2-cssomni'
+  Plug 'ncm2/ncm2-tern', {'do': 'npm install'}
+  Plug 'mhartington/nvim-typescript'
+  Plug 'ncm2/ncm2-neosnippet'
+
   " Utils
   Plug 'ap/vim-css-color' 
   Plug 'sheerun/vim-polyglot'
@@ -55,18 +69,18 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'NLKNguyen/papercolor-theme'
   Plug 'connorholyday/vim-snazzy'
   Plug 'kyoz/purify', { 'rtp': 'vim' }
-  Plug 'dracula/vim', {'as': 'dracula'}
   Plug 'flrnprz/candid.vim'
-  Plug 'kjssad/quantum.vim'
-  Plug 'ntk148v/vim-horizon'
-  Plug 'rafalbromirski/vim-aurora'
-  Plug 'DankNeon/vim'
-  Plug 'cseelus/vim-colors-tone'
+  " Plug 'kjssad/quantum.vim'
+  " Plug 'ntk148v/vim-horizon'
+  " Plug 'rafalbromirski/vim-aurora'
+  " Plug 'DankNeon/vim'
+  " Plug 'cseelus/vim-colors-tone'
   Plug 'jdsimcoe/abstract.vim'
-  Plug 'nightsense/nemo'
-  Plug 'Zabanaa/neuromancer.vim'
-  Plug 'nightsense/seabird'
-  Plug 'nightsense/snow'
-  Plug 'rhysd/vim-color-spring-night'
+  " Plug 'nightsense/nemo'
+  " Plug 'Zabanaa/neuromancer.vim'
+  " Plug 'nightsense/seabird'
+  " Plug 'nightsense/snow'
+  " Plug 'rhysd/vim-color-spring-night'
   Plug 'sonph/onehalf', {'rtp': 'vim/'}
+  Plug 'chriskempson/base16-vim'
   call plug#end()

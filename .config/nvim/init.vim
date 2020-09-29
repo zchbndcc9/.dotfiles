@@ -2,11 +2,11 @@
 source $HOME/.config/nvim/plugs.vim
 
 " Deoplete
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
+
+autocmd BufEnter * call ncm2#enable_for_buffer()
 let g:neosnippet#enable_completed_snippet = 1
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+set completeopt=noinsert,menuone,noselect
 
 " Language Server Stuff
 let g:LanguageClient_serverCommands = {
@@ -100,6 +100,11 @@ nnoremap <silent> yp yy p
 nnoremap <silent> YP yy P
 nnoremap <silent> ii cc
 
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
 "folding settings
 set foldmethod=indent
 set nofoldenable
@@ -117,6 +122,9 @@ if &term =~ '^screen'
   execute "set <xRight>=\e[1;*C"
   execute "set <xLeft>=\e[1;*D"
 endif
+
+" Syntax highlighting
 syntax on
+let base16colorspace=256
 set termguicolors
-colorscheme dracula
+colorscheme base16-snazzy
