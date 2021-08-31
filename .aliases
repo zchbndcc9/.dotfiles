@@ -3,7 +3,15 @@ alias dbc="db commit"
 alias abundle="antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh"
 alias leaftree="brew leaves | xargs brew deps --tree"
 
+alias dc="docker-compose"
+alias dcu="dc up"
+alias dcb="dc b"
+
 alias ls="ls -G"
 alias ll="ls -l"
 alias la="ls -a"
 alias lla="la -l"
+
+alias g="git"
+alias gs="g status"
+alias glab="git_collaborator"
