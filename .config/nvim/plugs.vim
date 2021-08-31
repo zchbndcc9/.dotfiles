@@ -1,9 +1,18 @@
 call plug#begin('~/.local/share/nvim/plugged')
+  
+  Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+  
   " HTML
   Plug 'alvan/vim-closetag'
   
+  Plug 'famiu/bufdelete.nvim'
+
+  " Typescript
+  Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
+  
   " Javascript/React
   Plug 'othree/yajs.vim'
+  Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
 
   " Python
   Plug 'vim-scripts/indentpython.vim' 
@@ -15,18 +24,12 @@ call plug#begin('~/.local/share/nvim/plugged')
   " YAML
   Plug 'stephpy/vim-yaml'
   
-  " Nerdtree
-  Plug 'scrooloose/nerdtree'
-  Plug 'Xuyuanp/nerdtree-git-plugin'
-  
-  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  " Plug 'wokalski/autocomplete-flow'
-  " Plug 'Shougo/neosnippet'
-  
-  " Neosnippet
-  Plug 'Shougo/neosnippet-snippets'
-  Plug 'Shougo/neosnippet'
-  
+  " Completion
+  Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+  Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+
+  Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+
   " Autocomplete
   Plug 'ncm2/ncm2'
   Plug 'roxma/nvim-yarp'
@@ -35,19 +38,24 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'ncm2/ncm2-syntax'
   Plug 'Shougo/neco-syntax'
   Plug 'ncm2/ncm2-cssomni'
+  Plug 'HerringtonDarkholme/yats.vim'
   Plug 'ncm2/ncm2-tern', {'do': 'npm install'}
-  Plug 'mhartington/nvim-typescript'
-  Plug 'ncm2/ncm2-neosnippet'
-
+  
+  Plug 'folke/tokyonight.nvim'
+  
+  " Ruby
+  Plug 'vim-ruby/vim-ruby'
+  
+  Plug 'norcalli/nvim-colorizer.lua'
+  
   " Utils
-  Plug 'ap/vim-css-color' 
   Plug 'sheerun/vim-polyglot'
   
   Plug 'kana/vim-textobj-function'
   Plug 'haya14busa/vim-textobj-function-syntax'
   
   Plug '/usr/local/opt/fzf'
-  Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/fzf.vim', { 'do': { -> fzf#install() } }
   Plug 'dense-analysis/ale'
   Plug 'kana/vim-textobj-user'
   Plug 'jiangmiao/auto-pairs'
@@ -58,7 +66,11 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'tpope/vim-unimpaired' 
   Plug 'qpkorr/vim-bufkill'
   Plug 'tpope/vim-repeat'
-  Plug 'ryanoasis/vim-devicons'
+  Plug 'tpope/vim-commentary'
+  " TODO May want to remove nerdcommenter
+  Plug 'preservim/nerdcommenter'
+
+  Plug 'sunjon/shade.nvim'
 
   " Git
   Plug 'airblade/vim-gitgutter'
@@ -67,20 +79,17 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Colorschemes
   Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
   Plug 'NLKNguyen/papercolor-theme'
+  Plug 'mhartington/oceanic-next'
   Plug 'connorholyday/vim-snazzy'
   Plug 'kyoz/purify', { 'rtp': 'vim' }
   Plug 'flrnprz/candid.vim'
-  " Plug 'kjssad/quantum.vim'
-  " Plug 'ntk148v/vim-horizon'
-  " Plug 'rafalbromirski/vim-aurora'
-  " Plug 'DankNeon/vim'
-  " Plug 'cseelus/vim-colors-tone'
+  Plug 'ghifarit53/tokyonight-vim'
   Plug 'jdsimcoe/abstract.vim'
-  " Plug 'nightsense/nemo'
-  " Plug 'Zabanaa/neuromancer.vim'
-  " Plug 'nightsense/seabird'
-  " Plug 'nightsense/snow'
-  " Plug 'rhysd/vim-color-spring-night'
   Plug 'sonph/onehalf', {'rtp': 'vim/'}
   Plug 'chriskempson/base16-vim'
+  Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
+" Plug 'ryanoasis/vim-devicons' Icons without colours
+  Plug 'akinsho/bufferline.nvim'
+  
+  
   call plug#end()

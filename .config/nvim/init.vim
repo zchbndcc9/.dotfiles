@@ -1,16 +1,13 @@
 " Plugs
 source $HOME/.config/nvim/plugs.vim
 
-" Deoplete
-" let g:deoplete#enable_at_startup = 1
-
 autocmd BufEnter * call ncm2#enable_for_buffer()
 let g:neosnippet#enable_completed_snippet = 1
 set completeopt=noinsert,menuone,noselect
 
 " Language Server Stuff
 let g:LanguageClient_serverCommands = {
-\   'reason': ['~/.local/share/nvim/lsp/reason-language-server']
+\   'reason': ['~/.local/share/nvim/lsp/reason-language-server'],
 \}
 
 " Ale
@@ -21,11 +18,25 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \  'javascript': ['prettier', 'eslint'],
 \  'javascript.jsx': ['prettier', 'eslint'],
+\  'typescript': ['prettier', 'eslint'],
+\  'typescriptreact': ['prettier', 'eslint'],
 \  'python': ['flake8', 'pylint'],
 \  'elixir': ['mix_format']
 \ }
 
+nmap fi :ALEFix<CR>
+nmap <C-H> :ALEHover<CR>
+nmap <C-[> :ALEGoToDefinition<CR>
+nmap <C-]> :ALEFindReferences<CR>
+nmap <C-A><C-I> :ALEImport<CR>
+nmap <C-D> :ALEDetail<CR>
+nmap <C-A><C-N> :ALENext<CR>
+nmap <C-A><C-P> :ALEPrevious<CR>
+
 let g:ale_elixir_elixir_ls_release = "/Users/zach/elixir-ls/rel"
+let g:ale_completion_autoimport = 1
+
+let g:coq_settings = { 'auto_start': v:true }
 
 " Airline config
 let g:airline_theme='purify'
@@ -35,10 +46,10 @@ let g:airline#extensions#ale#enabled = 1
 let g:closetag_filenames= '*.html, *.xhtml, *.xml, *.js, *.jsx'
 
 " Nerdtree config
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
 " GitGutter config
 set updatetime=100 
@@ -81,29 +92,21 @@ nnoremap <silent> wk <C-w>k
 nnoremap <silent> wl <C-w>l
 
 map <Space> :
-map <C-t> :NERDTreeToggle<CR>
+nnoremap <C-t> :CHADopen<CR>
 nmap ff :Files<CR>
 nmap <C-A> :Ag<CR>
-nmap fi :ALEFix<CR>
-nmap <C-A><C-N> :ALENext<CR>
-nmap <C-A><C-P> :ALEPrevious<CR>
+nmap <C-B> :Buffers<CR>
 nnoremap <C-N> :bnext<CR>
 nnoremap <C-P> :bprevious<CR>
 
 let mapleader = ';'
-nnoremap <silent> <leader>w :BD<CR>
-nnoremap <silent> <leader>q :q<CR>
-nnoremap <silent> <leader>s :w<CR>
-nnoremap <silent> vv <C-w>v
-nnoremap <silent> ss <C-w>s
+nnoremap <silent> <leader>q :q<cr>
+nnoremap <silent> <leader>s :w<cr>
+nnoremap <silent> <leader>w :Bdelete<cr>
+nnoremap <silent> vv <c-w>v
+nnoremap <silent> ss <c-w>s
 nnoremap <silent> yp yy p
-nnoremap <silent> YP yy P
-nnoremap <silent> ii cc
-
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+nnoremap <silent> yp yy p
 
 "folding settings
 set foldmethod=indent
@@ -113,18 +116,32 @@ set foldlevel=1
 "Colors
 if &term =~ '^screen' 
   " Page keys https://github.com/tmux/tmux/wiki/FAQ
-  execute "set t_kP=\e[5;*~"
-  execute "set t_kN=\e[6;*~"
+  execute "set t_kp=\e[5;*~"
+  execute "set t_kn=\e[6;*~"
 
   " Arrow keys http://unix.stackexchange.com/a/34723
   execute "set <xUp>=\e[1;*A"
-  execute "set <xDown>=\e[1;*B"
-  execute "set <xRight>=\e[1;*C"
-  execute "set <xLeft>=\e[1;*D"
+  execute "set <xdown>=\e[1;*b"
+  execute "set <xright>=\e[1;*c"
+  execute "set <xleft>=\e[1;*d"
 endif
 
+filetype plugin on
+
+" Random colorschemes
 " Syntax highlighting
 syntax on
 let base16colorspace=256
+lua << EOF
+require("bufferline").setup{}
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "all",
+  ignore_install = { "haskell" },
+  highlight = {
+    enable = true,
+  },
+}
+EOF
 set termguicolors
-colorscheme base16-snazzy
+lua require'colorizer'.setup()
+colorscheme tokyonight
