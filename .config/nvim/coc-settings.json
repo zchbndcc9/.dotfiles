@@ -1,0 +1,9 @@
+{
+  "codeLens.enable": true,
+  "languageserver": {
+    "elixirLS": {
+      "command": "/Users/zach/elixir-ls/rel",
+      "filetypes": ["elixir", "eelixir"]
+    }
+  }
+}

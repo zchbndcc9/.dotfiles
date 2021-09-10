@@ -2,6 +2,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
   
   " Utilities  
+  Plug 'prabirshrestha/vim-lsp'
   Plug 'neovim/nvim-lspconfig'
   Plug 'hoob3rt/lualine.nvim'
   Plug 'akinsho/bufferline.nvim'
@@ -16,8 +17,6 @@ call plug#begin('~/.local/share/nvim/plugged')
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-  Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-  Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
   Plug 'sheerun/vim-polyglot'
   Plug 'kana/vim-textobj-function'
   Plug 'haya14busa/vim-textobj-function-syntax'
@@ -26,6 +25,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'jiangmiao/auto-pairs'
   Plug 'qpkorr/vim-bufkill'
   Plug 'norcalli/nvim-colorizer.lua'
+
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
   Plug 'ludovicchabant/vim-gutentags'
   Plug 'tpope/vim-surround'

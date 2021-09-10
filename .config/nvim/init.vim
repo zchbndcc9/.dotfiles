@@ -35,8 +35,6 @@ nmap <C-A><C-P> :ALEPrevious<CR>
 let g:ale_elixir_elixir_ls_release = "/Users/zach/elixir-ls/rel"
 let g:ale_completion_autoimport = 1
 
-let g:coq_settings = { 'auto_start': v:true }
-
 let g:closetag_filenames= '*.html, *.xhtml, *.xml, *.js, *.jsx'
 
 " GitGutter config
@@ -101,6 +99,11 @@ nnoremap <silent> vv <c-w>v
 nnoremap <silent> ss <c-w>s
 nnoremap <silent> yp yy p
 
+inoremap <silent><expr> <TAB>
+\ pumvisible() ? '<C-n>' :
+\ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
+\ '<TAB>' : ddc#manual_complete()
+
 "folding settings
 set foldmethod=indent
 set nofoldenable
@@ -126,6 +129,8 @@ filetype plugin on
 syntax on
 let base16colorspace=256
 set termguicolors
+
+set signcolumn=number
 
 lua << EOF
   local actions = require'telescope.actions'
