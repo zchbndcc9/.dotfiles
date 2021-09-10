@@ -1,7 +1,7 @@
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
+export TERM=xterm-256color
 
-export TERM="xterm-256color"
 export ANDROID_HOME="/Users/zach/Library/Android/sdk"
 source $HOME/.aliases
 alias tmux="tmux -2"

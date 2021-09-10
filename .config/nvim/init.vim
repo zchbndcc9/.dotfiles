@@ -1,13 +1,12 @@
 " Plugs
 source $HOME/.config/nvim/plugs.vim
 
-autocmd BufEnter * call ncm2#enable_for_buffer()
-let g:neosnippet#enable_completed_snippet = 1
 set completeopt=noinsert,menuone,noselect
 
 " Language Server Stuff
 let g:LanguageClient_serverCommands = {
 \   'reason': ['~/.local/share/nvim/lsp/reason-language-server'],
+\   'javascript': ['/usr/local/bin/javascript-typescript-stdio']
 \}
 
 " Ale
@@ -38,18 +37,7 @@ let g:ale_completion_autoimport = 1
 
 let g:coq_settings = { 'auto_start': v:true }
 
-" Airline config
-let g:airline_theme='purify'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#ale#enabled = 1
-
 let g:closetag_filenames= '*.html, *.xhtml, *.xml, *.js, *.jsx'
-
-" Nerdtree config
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
 " GitGutter config
 set updatetime=100 
@@ -91,11 +79,17 @@ nnoremap <silent> wh <C-w>h
 nnoremap <silent> wk <C-w>k
 nnoremap <silent> wl <C-w>l
 
+nnoremap <C-G><C-G> :Git<CR> 
+
 map <Space> :
-nnoremap <C-t> :CHADopen<CR>
-nmap ff :Files<CR>
-nmap <C-A> :Ag<CR>
-nmap <C-B> :Buffers<CR>
+nnoremap <C-t> :NvimTreeToggle<CR>
+nnoremap <C-t>f :NvimTreeFindFile<CR>
+nnoremap <C-t>r :NvimTreeRefresh<CR>
+nmap ff  <cmd>:lua require('telescope.builtin').find_files()<CR>
+nmap <C-A> <cmd>:lua require('telescope.builtin').live_grep()<CR>
+nmap <C-B> <cmd>:lua require('telescope.builtin').buffers()<CR>
+nmap fb :lua require('telescope.builtin').git_branches()<CR>
+nmap fc :lua require('telescope.builtin').colorscheme()<CR>
 nnoremap <C-N> :bnext<CR>
 nnoremap <C-P> :bprevious<CR>
 
@@ -106,12 +100,13 @@ nnoremap <silent> <leader>w :Bdelete<cr>
 nnoremap <silent> vv <c-w>v
 nnoremap <silent> ss <c-w>s
 nnoremap <silent> yp yy p
-nnoremap <silent> yp yy p
 
 "folding settings
 set foldmethod=indent
 set nofoldenable
 set foldlevel=1
+
+set includeexpr=substitute(v:fname,'^~','./src')
 
 "Colors
 if &term =~ '^screen' 
@@ -128,20 +123,41 @@ endif
 
 filetype plugin on
 
-" Random colorschemes
-" Syntax highlighting
 syntax on
 let base16colorspace=256
-lua << EOF
-require("bufferline").setup{}
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",
-  ignore_install = { "haskell" },
-  highlight = {
-    enable = true,
-  },
-}
-EOF
 set termguicolors
-lua require'colorizer'.setup()
-colorscheme tokyonight
+
+lua << EOF
+  local actions = require'telescope.actions'
+
+  require'nvim-treesitter.configs'.setup {
+    ensure_installed = "all",
+    ignore_install = { "haskell" },
+    highlight = {
+      enable = true,
+    },
+  }
+  require'lualine'.setup {
+    options = {
+      theme = "tokyonight",
+      section_separators = ''
+    },
+    extensions = {'chadtree', 'fugitive'},
+  }
+  require'telescope'.setup {
+    defaults = {
+      mappings = {
+        i = {
+          ["<C-J>"] = actions.move_selection_next,
+          ["<C-K>"] = actions.move_selection_previous,
+          ["<C-A>"] = false,
+        }
+      }
+    }
+  }
+  require'bufferline'.setup()
+  require'colorizer'.setup()
+  
+  vim.cmd[[colorscheme onehalflight]]
+EOF
+
