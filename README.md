@@ -12,11 +12,10 @@ brew install --cask 1password
 3. Download fzf, gh, and dotbare
 ```sh
 brew install dotbare fzf gh
+
 ```
 
-4. Create ssh-key. Instructions [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent)
-
-5. Login to gh. Elect to upload the ssh key
+5. Login to gh. Elect to upload the ssh key. This will  generate an ssh key for you and upload it to GH
 ```sh
 gh auth login
 ```
@@ -30,3 +29,8 @@ dotbare finit -u git@github.com:zchbndcc9/.dotfiles.git
 ```sh
 brew bundle
 ```
+
+8. Download vim-plug to setup neovim
+```sh
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'```
