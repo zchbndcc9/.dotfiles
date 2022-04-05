@@ -3,46 +3,57 @@ source $HOME/.config/nvim/plugs.vim
 
 set completeopt=noinsert,menuone,noselect
 
-" Language Server Stuff
-let g:LanguageClient_serverCommands = {
-\   'reason': ['~/.local/share/nvim/lsp/reason-language-server'],
-\   'javascript': ['/usr/local/bin/javascript-typescript-stdio']
-\}
-
-" Ale
-let g:ale_linters = {
-\  'elixir': ['elixir-ls', 'dialyxir']
-\ }
-
-let g:ale_fixers = {
-\  'javascript': ['prettier', 'eslint'],
-\  'javascript.jsx': ['prettier', 'eslint'],
-\  'typescript': ['prettier', 'eslint'],
-\  'typescriptreact': ['prettier', 'eslint'],
-\  'python': ['flake8', 'pylint'],
-\  'elixir': ['mix_format']
-\ }
-
-nmap fi :ALEFix<CR>
-nmap <C-H> :ALEHover<CR>
-nmap <C-[> :ALEGoToDefinition<CR>
-nmap <C-]> :ALEFindReferences<CR>
-nmap <C-A><C-I> :ALEImport<CR>
-nmap <C-D> :ALEDetail<CR>
-nmap <C-A><C-N> :ALENext<CR>
-nmap <C-A><C-P> :ALEPrevious<CR>
-
-let g:ale_elixir_elixir_ls_release = "/Users/zach/elixir-ls/rel"
-let g:ale_completion_autoimport = 1
-
 let g:closetag_filenames= '*.html, *.xhtml, *.xml, *.js, *.jsx'
 
-" GitGutter config
-set updatetime=100 
-highlight GitGutterAdd    guifg=#009900
-highlight GitGutterChange guifg=#bbbb00
-highlight GitGutterDelete guifg=#ff2222
+let mapleader = ';'
 
+" COC
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+nmap <leader>rn <Plug>(coc-rename)
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>fi  <Plug>(coc-fix-current)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 " Various Config
 set tabstop=2       " The width of a TAB is set to 4.
                     " Still it is a \t. It is just that
@@ -80,9 +91,9 @@ nnoremap <silent> wl <C-w>l
 nnoremap <C-G><C-G> :Git<CR> 
 
 map <Space> :
-nnoremap <C-t> :NvimTreeToggle<CR>
-nnoremap <C-t>f :NvimTreeFindFile<CR>
-nnoremap <C-t>r :NvimTreeRefresh<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-t>f :NERDTreeFind<CR>
+
 nmap ff  <cmd>:lua require('telescope.builtin').find_files()<CR>
 nmap <C-A> <cmd>:lua require('telescope.builtin').live_grep()<CR>
 nmap <C-B> <cmd>:lua require('telescope.builtin').buffers()<CR>
@@ -91,7 +102,6 @@ nmap fc :lua require('telescope.builtin').colorscheme()<CR>
 nnoremap <C-N> :bnext<CR>
 nnoremap <C-P> :bprevious<CR>
 
-let mapleader = ';'
 nnoremap <silent> <leader>q :q<cr>
 nnoremap <silent> <leader>s :w<cr>
 nnoremap <silent> <leader>w :Bdelete<cr>
@@ -134,6 +144,15 @@ set signcolumn=number
 
 lua << EOF
   local actions = require'telescope.actions'
+  local path_to_elixirls = vim.fn.expand("~/.cache/nvim/lspconfig/elixirls/elixir-ls/release/language_server.sh")
+  
+  local lspconfig = require'lspconfig'
+
+  lspconfig.tsserver.setup{}
+  
+  lspconfig.elixirls.setup{
+    cmd = {path_to_elixirls}
+  }
 
   require'nvim-treesitter.configs'.setup {
     ensure_installed = "all",
@@ -162,7 +181,10 @@ lua << EOF
   }
   require'bufferline'.setup()
   require'colorizer'.setup()
+  require'gitsigns'.setup()
+  require'trouble'.setup()
+  require'lsp-colors'.setup()
   
-  vim.cmd[[colorscheme onehalflight]]
+  vim.cmd[[colorscheme aurora]]
 EOF
 

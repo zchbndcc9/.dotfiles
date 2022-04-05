@@ -1,32 +1,37 @@
 call plug#begin('~/.local/share/nvim/plugged')
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+  Plug 'neovim/nvim-lspconfig'
   
   " Utilities  
   Plug 'prabirshrestha/vim-lsp'
-  Plug 'neovim/nvim-lspconfig'
   Plug 'hoob3rt/lualine.nvim'
   Plug 'akinsho/bufferline.nvim'
   Plug 'ryanoasis/vim-devicons'
   Plug 'kyazdani42/nvim-web-devicons'
-  Plug 'kyazdani42/nvim-tree.lua'
+  " Plug 'kyazdani42/nvim-tree.lua'
+  
+  Plug 'preservim/nerdtree'
+  Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'alvan/vim-closetag'
   Plug 'famiu/bufdelete.nvim'
-  Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
   Plug 'sheerun/vim-polyglot'
   Plug 'kana/vim-textobj-function'
   Plug 'haya14busa/vim-textobj-function-syntax'
-  Plug 'dense-analysis/ale'
   Plug 'kana/vim-textobj-user'
   Plug 'jiangmiao/auto-pairs'
   Plug 'qpkorr/vim-bufkill'
   Plug 'norcalli/nvim-colorizer.lua'
+  Plug 'lewis6991/gitsigns.nvim'
+  Plug 'folke/trouble.nvim'
+  Plug 'github/copilot.vim'
 
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  
+  Plug 'folke/lsp-colors.nvim'
 
   Plug 'ludovicchabant/vim-gutentags'
   Plug 'tpope/vim-surround'
@@ -35,12 +40,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive' 
-
-  Plug 'airblade/vim-gitgutter'
-
-  " Javascript/React
-  Plug 'othree/yajs.vim'
-  Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
 
   " Python
   Plug 'vim-scripts/indentpython.vim' 
@@ -68,5 +67,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'chriskempson/base16-vim'
   Plug 'rakr/vim-colors-rakr'
   Plug 'folke/tokyonight.nvim'
+  Plug 'ray-x/aurora'
+  
+  Plug 'pantharshit00/vim-prisma'
   
   call plug#end()

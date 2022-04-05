@@ -2,7 +2,7 @@
   "codeLens.enable": true,
   "languageserver": {
     "elixirLS": {
-      "command": "/Users/zach/elixir-ls/rel",
+      "command": " /Users/zbanducci/.elixir-ls/release/language_server.sh",
       "filetypes": ["elixir", "eelixir"]
     }
   }
