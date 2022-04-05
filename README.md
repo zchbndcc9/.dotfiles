@@ -22,7 +22,7 @@ gh auth login
 dotbare finit -u git@github.com:zchbndcc9/.dotfiles.git
 ```
 
-5. Run install script
+5. Run brew bundle
 ```sh
-./.setup/install.sh
+brew bundle
 ```
