@@ -9,6 +9,9 @@ export EDITOR="nvim"
 export VISUAL="$EDITOR"
 export TERM=xterm-256color
 
+alias npm="pnpm"
+alias yarn="pnpm"
+
 export ANDROID_HOME="/Users/zach/Library/Android/sdk"
 
 source $HOME/.aliases
@@ -43,7 +46,7 @@ autoload -U add-zsh-hook
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-. /usr/local/opt/asdf/libexec/asdf.sh
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 # The following lines were added by compinstall
 
