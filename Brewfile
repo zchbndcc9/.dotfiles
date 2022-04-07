@@ -20,6 +20,7 @@ brew "python@3.10"
 brew "autojump"
 brew "bat"
 brew "ctags"
+brew "dash"
 brew "deno"
 brew "docker", link: false
 brew "docker-compose", link: false
