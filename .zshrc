@@ -9,9 +9,6 @@ export EDITOR="nvim"
 export VISUAL="$EDITOR"
 export TERM=xterm-256color
 
-alias npm="pnpm"
-alias yarn="pnpm"
-
 export ANDROID_HOME="/Users/zach/Library/Android/sdk"
 
 source $HOME/.aliases
@@ -40,6 +37,13 @@ setopt histignoredups
 
 autoload -U add-zsh-hook
 
+rebundle_brew() {
+  brew bundle --force --file=~/Brewfile dump
+  db add ~/Brewfile && db commit -m "Rebundle Brewfile"
+  db push
+}
+
+
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -48,8 +52,11 @@ autoload -U add-zsh-hook
 
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
+eval "$(op completion zsh)"; compdef _op op
+
 # The following lines were added by compinstall
 
 zstyle ':completion:*' completer _complete _ignored _approximate
 zstyle :compinstall filename '/Users/zbanducci/.zshrc'
-# End of lines added by compinstall
+
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
