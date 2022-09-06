@@ -1,4 +1,5 @@
-local utils = {}
+local M = {}
+local vim = vim
 
 local create_map = function(mode)
 	return function(lhs, rhs, config)
@@ -6,8 +7,9 @@ local create_map = function(mode)
 	end
 end
 
-utils.nmap = create_map('n')
-utils.vmap = create_map('v')
-utils.imap = create_map('i')
 
-return utils
+M.nmap = create_map('n')
+M.vmap = create_map('v')
+M.imap = create_map('i')
+
+return M
