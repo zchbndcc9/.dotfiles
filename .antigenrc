@@ -1,0 +1,19 @@
+antigen theme romkatv/powerlevel10k
+
+antigen bundles <<EOBUNDLES
+	kazhala/dotbare
+
+	# Colors
+	chrissicool/zsh-256color
+	 
+	laggardkernel/zsh-thefuck
+	Aloxaf/fzf-tab
+	wting/autojump
+	Cloudstek/zsh-plugin-appup
+
+	z-shell/F-Sy-H --branch=main
+	zsh-users/zsh-autosuggestions
+	zsh-users/zsh-completions
+EOBUNDLES
+
+antigen apply

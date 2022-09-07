@@ -15,3 +15,5 @@ alias lla="la -l"
 alias g="git"
 alias gs="g status"
 alias glab="git_collaborator"
+
+alias nv="nvim"

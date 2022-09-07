@@ -1,9 +1,5 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+export PATH=$(brew --prefix)/opt/python@3.9/libexec/bin:$PATH
+bindkey -e
 
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
@@ -13,6 +9,9 @@ export ANDROID_HOME="/Users/zach/Library/Android/sdk"
 
 source $HOME/.aliases
 
+source /opt/homebrew/share/antigen/antigen.zsh
+antigen init $HOME/.antigenrc
+
 # Auto completion 
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
@@ -20,12 +19,6 @@ fi
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit
 compinit
-
-source ~/.zsh_plugins.sh
-# check to see if work.zsh file exists and source it
-if [ -f $HOME/.work.zsh ]; then
-  source $HOME/.work.zsh
-fi
 
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export BAT_THEME="OneHalfDark"
@@ -43,6 +36,9 @@ rebundle_brew() {
   db push
 }
 
+gh_alias() {
+	gh alias set --shell ${1} "cp ~/.config/gh/${1}.hosts.yml ~/.config/gh/hosts.yml && gh auth status"
+}
 
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -53,6 +49,7 @@ rebundle_brew() {
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 eval "$(op completion zsh)"; compdef _op op
+eval $(thefuck --alias --enable-experimental-instant-mode)
 
 # The following lines were added by compinstall
 
