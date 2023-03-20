@@ -1,4 +1,4 @@
-local nmap = require 'utils'.nmap
+local map = require 'utils.map'
 
 local telescope = require 'telescope'
 local telescope_actions = require 'telescope.actions'
@@ -19,7 +19,7 @@ telescope.setup {
 		}
 	},
 	defaults = {
-		mappings = {
+		maps = {
 			i = {
 				["<C-J>"] = telescope_actions.move_selection_next,
 				["<C-K>"] = telescope_actions.move_selection_previous,
@@ -31,8 +31,8 @@ telescope.setup {
 telescope.load_extension 'fzf'
 telescope.load_extension 'node_modules'
 
-nmap('ff', telescope_builtin.find_files)
-nmap('<leader>ag', telescope_builtin.live_grep)
-nmap('<leader>ob', telescope_builtin.buffers)
-nmap('fb', telescope_builtin.git_branches)
-nmap('fc', telescope_builtin.colorscheme)
+map.n('ff', telescope_builtin.find_files)
+map.n('<leader>ag', telescope_builtin.live_grep)
+map.n('<leader>ob', telescope_builtin.buffers)
+map.n('fb', telescope_builtin.git_branches)
+map.n('fc', telescope_builtin.colorscheme)

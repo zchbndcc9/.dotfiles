@@ -1,6 +1,8 @@
 local vim = vim
 local opt = vim.opt
 
+opt.rnu = true
+
 opt.signcolumn = 'number'
 opt.shiftwidth = 2
 opt.tabstop = 2
@@ -11,8 +13,10 @@ opt.mouse = 'a'
 opt.spelllang = 'en'
 opt.termguicolors = true
 
+vim.wo.signcolumn = "yes"
+
 opt.timeoutlen = 300
 
 opt.completeopt = 'menuone,noinsert,noselect'
 
-vim.cmd [[colorscheme tokyonight]]
+vim.cmd[[colorscheme tokyonight]]

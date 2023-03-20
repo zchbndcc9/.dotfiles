@@ -1,29 +1,28 @@
 local vim = vim
-local nmap = require'utils'.nmap
-local imap = require'utils'.imap
 
-vim.g.mapleader = ';'
+local map = require'utils.map'
 
-vim.keymap.set('', '<Space>', ':')
-imap('jj', '<Esc>')
+vim.g.mapleader = ' '
 
-require('leap').set_default_keymaps()
+map.i('jj', '<Esc>')
 
-nmap('<leader>q', [[:q<CR>]], { silent = true })
-nmap('<leader>s', [[:w<CR>]], { silent = true })
-nmap('<leader>w', [[:Bdelete<CR>]], { silent = true })
+map.n('<leader>q', [[:q<CR>]], { silent = true })
+map.n('<leader>s', [[:w<CR>]], { silent = true })
+map.n('<leader>w', [[:Bdelete<CR>]], { silent = true })
 
-nmap('<C-n>', [[:bnext<CR>]])
-nmap('<C-p>', [[:bprevious<CR>]])
+map.n('<leader>p', [[:Hexplore!<CR>]])
+map.n('<leader>o', [[:Explore<CR>]])
+map.n('<C-n>', [[:bnext<CR>]])
+map.n('<C-p>', [[:bprevious<CR>]])
 
-nmap('<leader>le', [[:e $MYVIMRC<CR>]], { silent = true })
+map.n('<leader>le', [[:e $MYVIMRC<CR>]], { silent = true })
 
 -- Pane switching
-nmap('wj', '<C-w>j', { silent = true })
-nmap('wh', '<C-w>h', { silent = true })
-nmap('wk', '<C-w>k', { silent = true })
-nmap('wl', '<C-w>l', { silent = true })
-nmap('ss', '<C-w>s', { silent = true })
-nmap('vv', '<C-w>v', { silent = true })
+map.n('wj', '<C-w>j', { silent = true })
+map.n('wh', '<C-w>h', { silent = true })
+map.n('wk', '<C-w>k', { silent = true })
+map.n('wl', '<C-w>l', { silent = true })
+map.n('ss', '<C-w>s', { silent = true })
+map.n('vv', '<C-w>v', { silent = true })
 
-nmap('<C-G>', [[:Git<CR>]])
+map.n('<C-G><C-G>', [[:Git<CR>]])

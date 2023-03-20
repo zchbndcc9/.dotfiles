@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 export PATH=$(brew --prefix)/opt/python@3.9/libexec/bin:$PATH
 bindkey -e
 
@@ -57,3 +59,6 @@ zstyle ':completion:*' completer _complete _ignored _approximate
 zstyle :compinstall filename '/Users/zbanducci/.zshrc'
 
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"

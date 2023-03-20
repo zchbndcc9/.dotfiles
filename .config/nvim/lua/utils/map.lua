@@ -8,8 +8,8 @@ local create_map = function(mode)
 end
 
 
-M.nmap = create_map('n')
-M.vmap = create_map('v')
-M.imap = create_map('i')
+M.n = create_map('n')
+M.v = create_map('v')
+M.i = create_map('i')
 
 return M
