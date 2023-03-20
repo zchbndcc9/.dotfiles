@@ -18,8 +18,19 @@ require 'lazy'.setup({
 	{ 'max397574/better-escape.nvim', config = true },
 	{ 'chentoast/marks.nvim',         config = true },
 	{ 'folke/which-key.nvim',         config = true },
-	{ 'zbirenbaum/copilot.lua',       config = true, cmd = "InsertEnter" },
-	{ 'williamboman/mason.nvim',      config = true },
+	{
+		'zbirenbaum/copilot.lua',
+		config = true,
+		event = "InsertEnter",
+		opts = {
+			suggestion = {
+				enabled = true,
+				auto_trigger = true,
+			}
+		}
+	},
+
+	{ 'williamboman/mason.nvim', config = true },
 	{
 		'pwntester/octo.nvim',
 		dependencies = {
@@ -131,7 +142,7 @@ require 'lazy'.setup({
 		},
 		config = true,
 	},
-	{ 'windwp/nvim-ts-autotag',      config = true },
+	{ 'windwp/nvim-ts-autotag',  config = true },
 	'famiu/bufdelete.nvim',
 	{ 'norcalli/nvim-colorizer.lua', config = true },
 	{
@@ -139,11 +150,11 @@ require 'lazy'.setup({
 		config = function() require 'plugins.gitsigns' end,
 	},
 	'rhysd/conflict-marker.vim',
-	{ 'tpope/vim-fugitive',     keys = { '<C-G><C-G>', ":Git<CR>" } },
+	{ 'tpope/vim-fugitive',          keys = { '<C-G><C-G>', ":Git<CR>" } },
 	{
 		'ray-x/lsp_signature.nvim',
 		config = true,
-		cmd = 'InsertEnter'
+		event = 'InsertEnter'
 	},
 	{
 		'windwp/nvim-autopairs',
@@ -163,11 +174,13 @@ require 'lazy'.setup({
 
 	'neovim/nvim-lspconfig',
 	-- Completion
+	{ 'L3MON4D3/LuaSnip',       build = 'make install_jsregexp' },
 	{
 		'hrsh7th/nvim-cmp',
-		cmd = "InsertEnter",
+		event = "InsertEnter",
 		dependencies = {
 			'tamago324/cmp-zsh',
+			'L3MON4D3/LuaSnip',
 			'neovim/nvim-lspconfig',
 			'hrsh7th/cmp-nvim-lsp',
 			'hrsh7th/cmp-buffer',
