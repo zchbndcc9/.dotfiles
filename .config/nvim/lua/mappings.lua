@@ -25,4 +25,23 @@ map.n('wl', '<C-w>l', { silent = true })
 map.n('ss', '<C-w>s', { silent = true })
 map.n('vv', '<C-w>v', { silent = true })
 
-map.n('<C-G><C-G>', [[:Git<CR>]])
+map.n('<leader>gd', vim.lsp.buf.definition)
+map.n('<leader>gt', vim.lsp.buf.type_definition)
+map.n('gL', vim.diagnostic.open_float)
+map.n('K', vim.lsp.buf.hover)
+map.n('<leader>rn', vim.lsp.buf.rename)
+map.n('<leader>ca', vim.lsp.buf.code_action)
+map.v('<leader>ca', vim.lsp.buf.code_action)
+map.n('[d', vim.diagnostic.goto_prev)
+map.n('[D', function()
+	vim.diagnostic.goto_prev {
+		severity = vim.diagnostic.severity.ERROR
+	}
+end)
+map.n(']d', vim.diagnostic.goto_next)
+map.n(']D', function()
+	vim.diagnostic.goto_next {
+		severity = vim.diagnostic.severity.ERROR
+	}
+end)
+map.n('<leader>fi', vim.lsp.buf.format)

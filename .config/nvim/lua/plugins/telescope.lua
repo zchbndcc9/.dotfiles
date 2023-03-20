@@ -1,5 +1,3 @@
-local map = require 'utils.map'
-
 local telescope = require 'telescope'
 local telescope_actions = require 'telescope.actions'
 local telescope_builtin = require 'telescope.builtin'
@@ -29,10 +27,3 @@ telescope.setup {
 	}
 }
 telescope.load_extension 'fzf'
-telescope.load_extension 'node_modules'
-
-map.n('ff', telescope_builtin.find_files)
-map.n('<leader>ag', telescope_builtin.live_grep)
-map.n('<leader>ob', telescope_builtin.buffers)
-map.n('fb', telescope_builtin.git_branches)
-map.n('fc', telescope_builtin.colorscheme)

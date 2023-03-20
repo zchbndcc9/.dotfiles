@@ -1,4 +1,6 @@
 -- Nice n' tidy
-require 'plugins'
-require 'mappings'
 require 'options'
+require 'mappings'
+require 'plugins'
+
+vim.cmd[[colorscheme tokyonight]]

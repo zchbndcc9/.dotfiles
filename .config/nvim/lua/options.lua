@@ -18,5 +18,3 @@ vim.wo.signcolumn = "yes"
 opt.timeoutlen = 300
 
 opt.completeopt = 'menuone,noinsert,noselect'
-
-vim.cmd[[colorscheme tokyonight]]

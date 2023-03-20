@@ -1,237 +1,172 @@
-require 'impatient'
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
+end
 
-return require 'packer'.startup(function(use)
-	use 'wbthomason/packer.nvim'
-	use 'lewis6991/impatient.nvim'
-	use 'nathom/filetype.nvim'
+vim.opt.rtp:prepend(lazypath)
 
-	use {
-		'jbyuki/instant.nvim',
-		config = function()
-			vim.g.instant_username = "zach.banducci"
-		end
-	}
-
-	use {
-		'max397574/better-escape.nvim',
-		config = function()
-			require 'better_escape'.setup {}
-		end
-	}
-
-	use {
-		'chentoast/marks.nvim',
-		config = function()
-			require 'marks'.setup {}
-		end,
-	}
-
-	-- GH
-	use {
+require 'lazy'.setup({
+	'lewis6991/impatient.nvim',
+	'nathom/filetype.nvim',
+	{ 'max397574/better-escape.nvim', config = true },
+	{ 'chentoast/marks.nvim',         config = true },
+	{ 'folke/which-key.nvim',         config = true },
+	{ 'zbirenbaum/copilot.lua',       config = true, cmd = "InsertEnter" },
+	{ 'williamboman/mason.nvim',      config = true },
+	{
 		'pwntester/octo.nvim',
-		requires = {
+		dependencies = {
 			'nvim-lua/plenary.nvim',
 			'nvim-telescope/telescope.nvim',
 			'kyazdani42/nvim-web-devicons',
 		},
-		config = function()
-			require 'octo'.setup {
-				default_remote = { 'github', 'origin' }
-			}
-		end
-	}
+		opts = {
+			default_remote = { 'github', 'origin' }
+		},
+		config = true,
+	},
 
-	use {
+	{
 		'lukas-reineke/indent-blankline.nvim',
-		config = function()
+		init = function()
 			vim.opt.termguicolors = true
 			vim.opt.list = true
-
-			require 'indent_blankline'.setup {
-				show_current_context = true,
-				show_current_context_start = true,
-			}
-		end
-	}
-
-	-- treesitter
-	use {
+		end,
+		opts = {
+			show_current_context = true,
+			show_current_context_start = true,
+		},
+	},
+	{
 		'nvim-treesitter/nvim-treesitter',
 		run = ':TSUpdate',
-		requires = {
+		dependencies = {
 			'p00f/nvim-ts-rainbow',
+			'windwp/nvim-ts-autotag',
 			'RRethy/nvim-treesitter-endwise',
 			'nvim-treesitter/nvim-treesitter-textobjects',
 			'nvim-treesitter/nvim-treesitter-context',
 		},
-		config = [[require'config.treesitter']]
-	}
-
-	use {
-		'folke/which-key.nvim',
-		config = function()
-			require 'which-key'.setup {}
-		end
-	}
-
-	use 'github/copilot.vim'
-
-	use 'ggandor/leap.nvim'
-
-	-- Elixir
-	use {
-		'brendalf/mix.nvim',
-		requires = {
-			'nvim-lua/plenary.nvim',
-		},
-		ft = { 'elixir', 'heex' }
-	}
-
-	-- TS/JS
-	use {
-		'axelvc/template-string.nvim',
-		config = function()
-			require 'template-string'.setup {}
-		end,
-		ft = {
-			'javascript',
-			'javascriptreact',
-			'typescript',
-			'typescriptreact',
-		}
-	}
-
-	-- LSP
-	use {
+		config = function() require 'plugins.treesitter' end,
+	},
+	{
 		'williamboman/mason-lspconfig.nvim',
-		requires = 'williamboman/mason.nvim',
-		config = function()
-			require 'mason'.setup {}
-			require 'mason-lspconfig'.setup {}
-		end
-	}
-	use {
-		'neovim/nvim-lspconfig',
-		requires = {
+		dependencies = {
 			'williamboman/mason.nvim',
-			'williamboman/mason-lspconfig.nvim',
-			'nvim-telescope/telescope.nvim',
+			'neovim/nvim-lspconfig',
 		},
-		config = [[require'config.lsp']]
-	}
+		config = function()
+			require 'mason-lspconfig'.setup {}
 
-	use {
+
+			require 'mason-lspconfig'.setup_handlers {
+				function(server_name)
+					require 'lspconfig'[server_name].setup {}
+				end
+			}
+		end,
+	},
+	{
 		'jose-elias-alvarez/null-ls.nvim',
-		requires = {
+		dependencies = {
 			'nvim-lua/plenary.nvim',
 		},
-		config = [[require'config.null-ls']]
-	}
-
-	use {
+	},
+	{
 		'feline-nvim/feline.nvim',
-		requires = {
+		dependencies = {
 			'kyazdani42/nvim-web-devicons',
 			'lewis6991/gitsigns.nvim',
+			'folke/tokyonight.nvim',
 		},
-		config = [[require'config.feline']]
-	}
-
-	use {
+		config = function() require 'plugins.feline' end,
+	},
+	{
 		'akinsho/bufferline.nvim',
-		requires = { 'kyazdani42/nvim-web-devicons' },
-		config = require('bufferline').setup {}
-	}
-
-	use {
+		init = function()
+			vim.opt.termguicolors = true
+		end,
+		dependencies = { 'kyazdani42/nvim-web-devicons' },
+		config = true,
+	},
+	{
 		'kyazdani42/nvim-web-devicons',
-		config = function()
-			require 'nvim-web-devicons'.setup {
-				default = true,
-			}
-		end
-	}
-
-	-- Tree
-	use {
+		opts = {
+			default = true,
+		},
+		config = true,
+	},
+	{
 		'nvim-neo-tree/neo-tree.nvim',
-		requires = {
+		dependencies = {
 			'kyazdani42/nvim-web-devicons',
 			'nvim-lua/plenary.nvim',
 			'MunifTanjim/nui.nvim',
 		},
-		config = function()
-			local nmap = require 'utils'.nmap
-
-			require('neo-tree').setup {}
-
-			nmap('<C-t>', [[:Neotree toggle<CR>]], { silent = true })
-			nmap('<C-t>f', [[:Neotree focus<CR>]], { silent = true })
-		end
-	}
-
-	use {
+		lazy = true,
+		keys = {
+			{ 'C-t',    ":Neotree toggle<CR>" },
+			{ '<C-t>f', ":Neotree focus<CR>" },
+		},
+		config = true,
+	},
+	{
 		'nvim-telescope/telescope.nvim',
-		requires = {
+		dependencies = {
 			'nvim-lua/plenary.nvim',
-			'nvim-telescope/telescope-node-modules.nvim',
 			{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 		},
-		config = [[require'config.telescope']]
-	}
-
-	use {
-		'mrshmllow/document-color.nvim',
-		config = function()
-			require 'document-color'.setup {}
-		end
-	}
-	use 'windwp/nvim-ts-autotag'
-	use 'famiu/bufdelete.nvim'
-	use {
-		'norcalli/nvim-colorizer.lua',
-		config = function()
-			require 'colorizer'.setup {}
-		end
-	}
-
-	-- Git
-	use {
+		keys = {
+			{ 'ff',         ':Telescope find_files<CR>' },
+			{ '<leader>ag', ':Telescope live_grep<CR>' },
+			{ 'fb',         ':Telescope git_branches<CR>' },
+			{ 'fc',         ':Telescope colorschemes<CR>' },
+		},
+		config = true,
+	},
+	{ 'windwp/nvim-ts-autotag',      config = true },
+	'famiu/bufdelete.nvim',
+	{ 'norcalli/nvim-colorizer.lua', config = true },
+	{
 		'lewis6991/gitsigns.nvim',
-		config = [[require'config.gitsigns']],
-	}
-	use 'rhysd/conflict-marker.vim'
-	use 'tpope/vim-fugitive'
-
-	use {
+		config = function() require 'plugins.gitsigns' end,
+	},
+	'rhysd/conflict-marker.vim',
+	{ 'tpope/vim-fugitive',     keys = { '<C-G><C-G>', ":Git<CR>" } },
+	{
 		'ray-x/lsp_signature.nvim',
-		config = function()
-			require 'lsp_signature'.setup {}
-		end
-	}
-
-	use {
+		config = true,
+		cmd = 'InsertEnter'
+	},
+	{
 		'windwp/nvim-autopairs',
-		config = function()
-			require 'nvim-autopairs'.setup {
-				check_ts = true,
-				ts_config = {
-					javascript = { 'template_string' },
-				}
+		opts = {
+			check_ts = true,
+			ts_config = {
+				javascript = { 'template_string' },
 			}
-		end
-	}
+		},
+	},
 
 	-- Command menu
-	use {
+	{
 		'gelguy/wilder.nvim',
-		config = [[require'config.wilder']],
-	}
+		config = function() require 'plugins.wilder' end,
+	},
 
+	'neovim/nvim-lspconfig',
 	-- Completion
-	use {
+	{
 		'hrsh7th/nvim-cmp',
-		requires = {
+		cmd = "InsertEnter",
+		dependencies = {
 			'tamago324/cmp-zsh',
 			'neovim/nvim-lspconfig',
 			'hrsh7th/cmp-nvim-lsp',
@@ -243,80 +178,68 @@ return require 'packer'.startup(function(use)
 			'onsails/lspkind.nvim',
 			'hrsh7th/cmp-nvim-lua',
 			'KadoBOT/cmp-plugins',
+			'windwp/nvim-autopairs',
 		},
-		config = [[require'config.cmp']],
-	}
+		config = function() require 'plugins.cmp' end,
+	},
 
 	-- Diagnostic explorer
-	use {
+	{
 		'folke/trouble.nvim',
-		requires = { 'kyazdani42/nvim-web-devicons' },
-		config = function()
-			require 'trouble'.setup {}
-		end
-	}
-	use {
-		'folke/lsp-colors.nvim',
-		config = function()
-			require 'lsp-colors'.setup {}
-		end
-	}
+		dependencies = { 'kyazdani42/nvim-web-devicons' },
+		config = true,
+	},
 
 	-- Peek line with comand :{number}
-	use {
-		'nacro90/numb.nvim',
-		config = function()
-			require 'numb'.setup {}
-		end
-	}
-
-	use {
-		'kylechui/nvim-surround',
-		config = function()
-			require 'nvim-surround'.setup {}
-		end
-	}
-	use 'tpope/vim-repeat'
-
-	use {
-		'numToStr/Comment.nvim',
-		config = function()
-			require 'Comment'.setup {}
-		end
-	}
-
+	{ 'nacro90/numb.nvim',      config = true },
+	{ 'kylechui/nvim-surround', config = true },
+	'tpope/vim-repeat',
+	{ 'numToStr/Comment.nvim', config = true },
 	-- YAML
-	use {
+	{
 		'stephpy/vim-yaml',
 		ft = { 'yaml ' }
-	}
+	},
 
 	-- Colorschemes
-	use {
-		'folke/tokyonight.nvim',
-		{
-			'shaunsingh/moonlight.nvim',
-			config = function()
-				vim.g.moonlight_italic_comments = true
-				vim.g.moonlight_italic_keywords = true
-				vim.g.moonlight_contrast = true
-			end
-		},
-		{
-			'catppuccin/nvim',
-			as = 'catppuccin',
-			config = function()
-				require 'catppuccin'.setup {}
-			end
-		},
-	}
-
-	use {
+	-- Main colorschemes should not be lazily loaded
+	{ 'folke/tokyonight.nvim' },
+	{
+		'shaunsingh/moonlight.nvim',
+		init = function()
+			vim.g.moonlight_italic_comments = true
+			vim.g.moonlight_italic_keywords = true
+			vim.g.moonlight_contrast = true
+		end,
+		lazy = true,
+	},
+	{
+		'catppuccin/nvim',
+		name = 'catppuccin',
+		lazy = true,
+	},
+	{
 		'pantharshit00/vim-prisma',
 		ft = { 'prisma' },
-	}
-	use {
+	},
+	{
 		'fladson/vim-kitty',
 		ft = { 'kitty' },
-	}
-end)
+	},
+	{
+		'brendalf/mix.nvim',
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+		},
+		ft = { 'elixir', 'heex' }
+	},
+	{
+		'axelvc/template-string.nvim',
+		ft = {
+			'javascript',
+			'javascriptreact',
+			'typescript',
+			'typescriptreact',
+		}
+	},
+})

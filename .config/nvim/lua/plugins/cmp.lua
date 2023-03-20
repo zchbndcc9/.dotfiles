@@ -74,7 +74,6 @@ cmp.setup.filetype('gitcommit', {
 	}, {
 		name = 'buffer',
 	})
-
 })
 
 local cmp_autopairs = require 'nvim-autopairs.completion.cmp'

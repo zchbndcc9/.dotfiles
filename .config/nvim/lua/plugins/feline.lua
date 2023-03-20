@@ -79,7 +79,7 @@ local position = {
 }
 
 local feline = require 'feline'
-local colors = require'tokyonight.colors'.setup()
+local colors = require'tokyonight.colors'.setup {}
 
 feline.setup {
 	components = {
