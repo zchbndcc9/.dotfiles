@@ -1,0 +1,21 @@
+# Dotfile configuration :)
+kazhala/dotbare
+
+# Git goodies
+wfxr/forgit
+ytakahashi/igit
+
+# Colors
+chrissicool/zsh-256color
+zdharma-continuum/fast-syntax-highlighting
+ 
+softmoth/zsh-vim-mode
+laggardkernel/zsh-thefuck
+Aloxaf/fzf-tab
+wting/autojump
+Cloudstek/zsh-plugin-appup
+zsh-users/zsh-completions
+marlonrichert/zsh-autocomplete
+zsh-users/zsh-autosuggestions
+
+romkatv/powerlevel10k
