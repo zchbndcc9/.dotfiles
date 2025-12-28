@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Fig pre block. Keep at the top of this file.
 [[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 export PATH=$(brew --prefix)/opt/python@3.9/libexec/bin:$PATH
@@ -6,8 +13,6 @@ bindkey -e
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
 export TERM=xterm-256color
-
-export ANDROID_HOME="/Users/zach/Library/Android/sdk"
 
 source $HOME/.aliases
 
@@ -31,12 +36,6 @@ setopt globdots
 setopt histignoredups
 
 autoload -U add-zsh-hook
-
-rebundle_brew() {
-  brew bundle --force --file=~/Brewfile dump
-  db add ~/Brewfile && db commit -m "Rebundle Brewfile"
-  db push
-}
 
 gh_alias() {
 	gh alias set --shell ${1} "cp ~/.config/gh/${1}.hosts.yml ~/.config/gh/hosts.yml && gh auth status"
