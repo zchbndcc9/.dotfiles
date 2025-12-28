@@ -17,6 +17,7 @@ brew "utf8proc"
 brew "neovim"
 brew "pnpm"
 brew "ripgrep"
+brew "the_silver_searcher"
 brew "tmux"
 brew "trash", link: true
 brew "tw93/tap/mole"
