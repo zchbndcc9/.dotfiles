@@ -1,6 +1,6 @@
 -- Nice n' tidy
-require 'options'
-require 'mappings'
-require 'plugins'
+require("options")
+require("mappings")
+require("config.lazy")
 
-vim.cmd[[colorscheme tokyonight]]
+vim.cmd([[colorscheme nightfall]])

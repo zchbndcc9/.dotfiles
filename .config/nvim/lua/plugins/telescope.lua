@@ -1,29 +1,61 @@
-local telescope = require 'telescope'
-local telescope_actions = require 'telescope.actions'
-local telescope_builtin = require 'telescope.builtin'
+return {
+	{
+		"nvim-telescope/telescope.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+		},
+		keys = {
+			{
+				"ff",
+				function()
+					require("telescope.builtin").find_files()
+				end,
+				desc = "Telescope find files",
+			},
+			{
+				"<leader>rg",
+				function()
+					require("telescope.builtin").live_grep()
+				end,
+				desc = "Telescope live grep",
+			},
+			{
+				"fb",
+				function()
+					require("telescope.builtin").git_branches()
+				end,
+				desc = "Telescope find git branches",
+			},
+			{
+				"fc",
+				function()
+					require("telescope.builtin").colorscheme()
+				end,
+				desc = "Change color scheme",
+			},
+		},
+		config = function()
+			local telescope = require("telescope")
+			local telescope_actions = require("telescope.actions")
 
-telescope.setup {
-	extensions = {
-		fzf = {
-			fuzzy = true,
-			override_generic_sorter = true,
-			override_file_sorter = true,
-			case_mode = 'smart_case',
-		}
+			telescope.setup({
+				pickers = {
+					colorscheme = {
+						enable_preview = true,
+					},
+				},
+				defaults = {
+					maps = {
+						i = {
+							["<C-J>"] = telescope_actions.move_selection_next,
+							["<C-K>"] = telescope_actions.move_selection_previous,
+							["<C-A>"] = false,
+						},
+					},
+				},
+			})
+			telescope.load_extension("fzf")
+		end,
 	},
-	pickers = {
-		colorscheme = {
-			enable_preview = true
-		}
-	},
-	defaults = {
-		maps = {
-			i = {
-				["<C-J>"] = telescope_actions.move_selection_next,
-				["<C-K>"] = telescope_actions.move_selection_previous,
-				["<C-A>"] = false,
-			}
-		}
-	}
 }
-telescope.load_extension 'fzf'
