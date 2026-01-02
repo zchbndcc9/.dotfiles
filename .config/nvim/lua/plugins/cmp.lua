@@ -1,4 +1,4 @@
-function setup()
+local function setup()
 	local vim = vim
 
 	local has_words_before = function()
@@ -19,8 +19,6 @@ function setup()
 		nvim_lsp = "LSP",
 		buffer = "BUF",
 		path = "PATH",
-		luasnip = "SNIP",
-		nvim_lua = "LUA",
 		treesitter = "TS",
 		git = "GIT",
 		emoji = "EMOJI",
@@ -113,30 +111,35 @@ function setup()
 		}),
 	})
 
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    }),
+    matching = { disallow_symbol_nonprefix_matching = false }
+  })
+
 	local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-	cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+	cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 end
 
 return {
-	{ "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
 	{
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
-			"tamago324/cmp-zsh",
-			"L3MON4D3/LuaSnip",
 			"neovim/nvim-lspconfig",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
-			"dcampos/nvim-snippy",
-			"dcampos/cmp-snippy",
 			"onsails/lspkind.nvim",
 			"hrsh7th/cmp-nvim-lua",
 			"KadoBOT/cmp-plugins",
 			"windwp/nvim-autopairs",
 		},
-		config = setup
+		config = setup,
 	},
 }
