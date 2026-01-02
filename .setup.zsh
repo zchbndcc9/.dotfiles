@@ -2,8 +2,6 @@
 set -e
 
 BREWFILE="$DOTFILES_DIR/Brewfile"
-ANTIGEN_DIR="$HOME/.antigen"
-ANTIGEN_FILE="$HOME/.antigen.zsh"
 ZSHRC="$HOME/.zshrc"
 
 # Install Homebrew
@@ -29,4 +27,5 @@ fi
 echo "♻️ Reloading shell..."
 source "$ZSHRC"
 
-echo "🎉 Setup complete!"
+echo "🎉 Setup complete\n
+Run `gh login auth`"
