@@ -19,6 +19,7 @@ brew "ripgrep"
 brew "tmux"
 brew "trash", link: true
 brew "tree-sitter-cli"
+brew "wget"
 brew "tw93/tap/mole"
 cask "codex"
 cask "firefox"
