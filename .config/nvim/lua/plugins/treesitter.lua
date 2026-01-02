@@ -7,18 +7,21 @@ return {
 			"RRethy/nvim-treesitter-endwise",
 			"nvim-treesitter/nvim-treesitter-context",
 		},
-		opts = {
-			ensure_installed = { "typescript", "tsx", "javascript", "lua", "json", "html" },
-			highlight = {
-				enable = true,
-			},
-			indent = {
-				enable = true,
-			},
-			endwise = {
-				enable = true,
-			},
-		},
+		opts = {},
+		config = function(_plugin, opts)
+			local treesitter = require("nvim-treesitter")
+
+			treesitter.setup(opts)
+
+			treesitter.install({ "typescript", "tsx", "javascript", "lua", "json", "html" })
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = { "typescript", "javascript", "lua", "typescriptreact", "html", "json" },
+				callback = function()
+					vim.treesitter.start()
+					vim.bo.indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"
+				end,
+			})
+		end,
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
@@ -42,34 +45,34 @@ return {
 					["ic"] = "@class.inner",
 				},
 			},
-			-- 	move = {
-			-- 		enable = true,
-			-- 		set_jumps = true, -- whether to set jumps in the jumplist
-			-- 		goto_next_start = {
-			-- 			["]m"] = "@function.outer",
-			-- 			["]]"] = "@class.outer",
-			-- 		},
-			-- 		goto_next_end = {
-			-- 			["]M"] = "@function.outer",
-			-- 			["]["] = "@class.outer",
-			-- 		},
-			-- 		goto_previous_start = {
-			-- 			["[m"] = "@function.outer",
-			-- 			["[["] = "@class.outer",
-			-- 		},
-			-- 		goto_previous_end = {
-			-- 			["[M"] = "@function.outer",
-			-- 			["[]"] = "@class.outer",
-			-- 		},
-			-- 	},
-			-- 	lsp_interop = {
-			-- 		enable = true,
-			-- 		border = "none",
-			-- 		peek_definition_code = {
-			-- 			["<leader>df"] = "@function.outer",
-			-- 			["<leader>dF"] = "@class.outer",
-			-- 		},
-			-- 	},
+			-- 			-- 	move = {
+			-- 			-- 		enable = true,
+			-- 			-- 		set_jumps = true, -- whether to set jumps in the jumplist
+			-- 			-- 		goto_next_start = {
+			-- 			-- 			["]m"] = "@function.outer",
+			-- 			-- 			["]]"] = "@class.outer",
+			-- 			-- 		},
+			-- 			-- 		goto_next_end = {
+			-- 			-- 			["]M"] = "@function.outer",
+			-- 			-- 			["]["] = "@class.outer",
+			-- 			-- 		},
+			-- 			-- 		goto_previous_start = {
+			-- 			-- 			["[m"] = "@function.outer",
+			-- 			-- 			["[["] = "@class.outer",
+			-- 			-- 		},
+			-- 			-- 		goto_previous_end = {
+			-- 			-- 			["[M"] = "@function.outer",
+			-- 			-- 			["[]"] = "@class.outer",
+			-- 			-- 		},
+			-- 			-- 	},
+			-- 			-- 	lsp_interop = {
+			-- 			-- 		enable = true,
+			-- 			-- 		border = "none",
+			-- 			-- 		peek_definition_code = {
+			-- 			-- 			["<leader>df"] = "@function.outer",
+			-- 			-- 			["<leader>dF"] = "@class.outer",
+			-- 			-- 		},
+			-- 			-- 	},
 		},
 	},
 }
