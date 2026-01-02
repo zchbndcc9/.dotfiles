@@ -18,6 +18,8 @@ export TERM=xterm-256color
 
 source $HOME/.aliases
 
+export PATH="$HOME/.local/bin:$PATH"
+
 # Auto completion 
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
@@ -48,4 +50,3 @@ zstyle :compinstall filename '/Users/zbanducci/.zshrc'
 gh_alias() {
 	gh alias set --shell ${1} "cp ~/.config/gh/${1}.hosts.yml ~/.config/gh/hosts.yml && gh auth status"
 }
-

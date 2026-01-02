@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+BREWFILE="$HOME/Brewfile"
+
+brew bundle --file="$BREWFILE" --force dump
+
+if dotbare diff --quiet "$BREWFILE"; then
+	echo "No changes detected"
+	exit 0
+fi
+
+dotbare add "$BREWFILE"
+dotbare commit -m 'Update Brewfile'
+
+dotbare push
