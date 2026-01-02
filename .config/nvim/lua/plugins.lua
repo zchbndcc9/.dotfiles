@@ -1,5 +1,4 @@
 return {
-	"nathom/filetype.nvim",
 	{ "max397574/better-escape.nvim", config = true },
 	{
 		"chentoast/marks.nvim",
@@ -16,6 +15,7 @@ return {
 		main = "ibl",
 		---@module "ibl"
 		---@type ibl.config,
+		--[[ 	 ]]
 		opts = {},
 	},
 	{
@@ -32,6 +32,7 @@ return {
 			"neovim/nvim-lspconfig",
 		},
 		opts = {
+			automatic_enable = true,
 			ensure_installed = { "lua_ls" },
 		},
 	},
@@ -39,6 +40,9 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {
+			options = { theme = "palenight" },
+		},
 	},
 	{
 		"akinsho/bufferline.nvim",
@@ -55,36 +59,22 @@ return {
 		},
 		config = true,
 	},
-	--- File Explorer
-	{
-		"stevearc/oil.nvim",
-		---@module 'oil'
-		---@type oil.SetupOpts
-		opts = {
-			win_options = {
-				signcolumn = "yes:2",
-			},
-		},
-		dependencies = {
-			{ "nvim-mini/mini.icons", opts = {} },
-		},
-		keys = {
-			{ "<leader>o", ":Oil<CR>", desc = "Open parent directory" },
-		},
-		lazy = false,
-	},
-	{
-		"refractalize/oil-git-status.nvim",
-		dependencies = {
-			"stevearc/oil.nvim",
-		},
-		config = true,
-	},
 	{ "windwp/nvim-ts-autotag", config = true },
-	"famiu/bufdelete.nvim",
-	{ "norcalli/nvim-colorizer.lua", config = true },
+	{
+		"famiu/bufdelete.nvim",
+		keys = {
+			{ "<leader>w", ":Bdelete<CR>", desc = "Delete buffer" },
+			{ "<leader>W", ":Bdelete!<CR>", desc = "Delete buffer (force)" },
+		},
+	},
+	{ "norcalli/nvim-colorizer.lua", opts = {} },
 	"rhysd/conflict-marker.vim",
-	{ "tpope/vim-fugitive", keys = { "<C-G><C-G>", ":Git<CR>", desc = "Open Git menu" } },
+	{
+		"tpope/vim-fugitive",
+		keys = {
+			{ "<C-G><C-G>", ":Git<CR>", desc = "Open Git menu" },
+		},
+	},
 	{
 		"ray-x/lsp_signature.nvim",
 		event = "InsertEnter",
@@ -105,10 +95,6 @@ return {
 		},
 	},
 
-	"neovim/nvim-lspconfig",
-	-- Completion
-	{ "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
-
 	-- Diagnostic explorer
 	{
 		"folke/trouble.nvim",
@@ -116,9 +102,13 @@ return {
 		config = true,
 	},
 
-	-- Peek line with comand :{number}
-	{ "nacro90/numb.nvim", config = true },
-	{ "kylechui/nvim-surround", config = true },
+	{
+		"kylechui/nvim-surround",
+		version = "^3.0.0",
+		event = "VeryLazy",
+		opts = {},
+	},
+
 	"tpope/vim-repeat",
 	{ "numToStr/Comment.nvim", config = true },
 	-- YAML
