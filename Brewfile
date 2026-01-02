@@ -22,6 +22,7 @@ brew "trash", link: true
 brew "tree-sitter-cli"
 brew "tw93/tap/mole"
 cask "codex"
+cask "font-hack-nerd-font"
 cask "mitmproxy"
 vscode "bradlc.vscode-tailwindcss"
 vscode "dbaeumer.vscode-eslint"
