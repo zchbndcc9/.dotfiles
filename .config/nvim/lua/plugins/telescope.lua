@@ -11,21 +11,21 @@ return {
 				function()
 					require("telescope.builtin").find_files()
 				end,
-				desc = "Telescope find files",
+				desc = "Telescope: Find files",
 			},
 			{
 				"<leader>rg",
 				function()
 					require("telescope.builtin").live_grep()
 				end,
-				desc = "Telescope live grep",
+				desc = "Telescope: Live grep",
 			},
 			{
 				"fb",
 				function()
 					require("telescope.builtin").git_branches()
 				end,
-				desc = "Telescope find git branches",
+				desc = "Telescope: Find git branches",
 			},
 			{
 				"fc",
