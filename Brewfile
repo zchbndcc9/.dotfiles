@@ -21,6 +21,7 @@ brew "tmux"
 brew "trash", link: true
 brew "tree-sitter-cli"
 brew "tw93/tap/mole"
+cask "claude-code"
 cask "codex"
 cask "font-hack-nerd-font"
 cask "mitmproxy"
