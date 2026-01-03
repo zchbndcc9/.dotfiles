@@ -1,7 +1,7 @@
 #!/usr/bin env zsh
 set -e
 
-BREWFILE="$DOTFILES_DIR/Brewfile"
+BREWFILE="$HOME/Brewfile"
 ZSHRC="$HOME/.zshrc"
 
 # Install Homebrew
@@ -27,5 +27,4 @@ fi
 echo "♻️ Reloading shell..."
 source "$ZSHRC"
 
-echo "🎉 Setup complete\n
-Run `gh login auth`"
+gh auth login
