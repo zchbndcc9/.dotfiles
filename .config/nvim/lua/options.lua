@@ -17,4 +17,7 @@ vim.wo.signcolumn = "yes"
 
 opt.timeoutlen = 300
 
+-- Enable project level config via .nvim.lua
+opt.exrc = true
+
 opt.completeopt = "menuone,noinsert,noselect"
