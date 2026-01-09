@@ -28,6 +28,10 @@ fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit
 compinit
 
+if command -v op >/dev/null 2>&1; then
+	eval "$(op completion zsh)"; compdef _op op
+fi
+
 export BAT_THEME="OneHalfDark"
 
 setopt correct
