@@ -11,8 +11,8 @@ return {
 		opts = {},
 	},
 	{
-		'nvim-tree/nvim-web-devicons',
-		opts = {}
+		"nvim-tree/nvim-web-devicons",
+		opts = {},
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -45,7 +45,7 @@ return {
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
-			options = { theme = "palenight" },
+			extensions = { "oil", "fugitive", "lazy", "mason", "quickfix" },
 		},
 	},
 	{
@@ -72,7 +72,7 @@ return {
 		},
 	},
 	{ "norcalli/nvim-colorizer.lua", opts = {} },
-	"rhysd/conflict-marker.vim",
+	{ "akinsho/git-conflict.nvim", opts = {} },
 	{
 		"tpope/vim-fugitive",
 		keys = {
@@ -125,11 +125,19 @@ return {
 		"stevearc/conform.nvim",
 		opts = {
 			formatters_by_ft = {
-				lua = { "stylelua" },
+				lua = { "stylua" },
 				javascript = { "prettierd", "prettier", stop_after_first = true },
 				typescript = { "prettierd", "prettier", stop_after_first = true },
 				javascriptreact = { "prettierd", "prettier", stop_after_first = true },
 				typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+			},
+		},
+		keys = {
+			{
+				"<leader>fi",
+				function()
+					require("conform").format()
+				end,
 			},
 		},
 	},
@@ -146,8 +154,64 @@ return {
 			"typescriptreact",
 		},
 	},
-	-- { diffview.nvim },
-	-- { git-conflict.nvim }
-	-- { nvim-lint }
-	-- { todo-comments.nvim }
+	{
+		"hrsh7th/nvim-pasta",
+		keys = {
+			{
+				"p",
+				function()
+					require("pasta.mapping").p()
+				end,
+				{ "n", "x" },
+				desc = "Paste",
+			},
+			{
+				"P",
+				function()
+					require("pasta.mapping").P()
+				end,
+				{ "n", "x" },
+				desc = "Paste before",
+			},
+		},
+	},
+	{
+		"romus204/referencer.nvim",
+		opts = {
+			enable = true,
+		},
+		keys = {
+			{ "<leader>vr", "<CMD>ReferencerToggle<CR>", desc = "View number references" },
+		},
+	},
+	{
+		"iamcco/markdown-preview.nvim",
+		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+		ft = { "markdown" },
+		build = "cd app & yarn install",
+		init = function()
+			vim.g.mkdp_filetypes = { "markdown" }
+		end,
+	},
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {},
+		keys = {
+			{
+				"[t",
+				function()
+					require("todo-comments").jump_prev()
+				end,
+				desc = "Previous todo comment",
+			},
+			{
+				"]t",
+				function()
+					require("todo-comments").jump_next()
+				end,
+				desc = "Next todo comment",
+			},
+		},
+	},
 }

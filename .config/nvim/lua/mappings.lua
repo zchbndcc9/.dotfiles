@@ -41,4 +41,3 @@ map.n("]D", function()
 		severity = vim.diagnostic.severity.ERROR,
 	})
 end, { desc = "Next error" })
-map.n("<leader>fi", vim.lsp.buf.format, { desc = "Fix it!" })
