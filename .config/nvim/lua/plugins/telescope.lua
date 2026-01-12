@@ -17,7 +17,7 @@ return {
 			{
 				"<leader>fF",
 				function()
-					require("telescope.builtin").find_files({ hidden = true })
+					require("telescope.builtin").find_files({ hidden = true, no_ignore = true })
 				end,
 				desc = "Telescope: Find files (incl. hidden)",
 			},

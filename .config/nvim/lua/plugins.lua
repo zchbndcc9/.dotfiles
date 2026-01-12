@@ -53,8 +53,12 @@ return {
 		init = function()
 			vim.opt.termguicolors = true
 		end,
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {},
+		dependencies = { "nvim-tree/nvim-web-devicons", "catppuccin" },
+		config = function()
+			require("bufferline").setup({
+				highlights = require("catppuccin.special.bufferline").get_theme(),
+			})
+		end,
 	},
 	{
 		"nvim-tree/nvim-web-devicons",
