@@ -32,8 +32,6 @@ if command -v op >/dev/null 2>&1; then
 	eval "$(op completion zsh)"; compdef _op op
 fi
 
-export BAT_THEME="OneHalfDark"
-
 setopt correct
 setopt autocd
 setopt globdots
@@ -54,3 +52,6 @@ zstyle :compinstall filename '/Users/zbanducci/.zshrc'
 gh_alias() {
 	gh alias set --shell ${1} "cp ~/.config/gh/${1}.hosts.yml ~/.config/gh/hosts.yml && gh auth status"
 }
+
+# Mole shell completion
+if output="$(mole completion zsh 2>/dev/null)"; then eval "$output"; fi
