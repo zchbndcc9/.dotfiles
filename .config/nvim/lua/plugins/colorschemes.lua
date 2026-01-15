@@ -23,4 +23,15 @@ return {
 		priority = 1000,
 		opts = {},
 	},
+	{
+		'ydkulks/cursor-dark.nvim',
+		lazy = false,
+		priority = 1000,
+		opts = {}
+	},
+	{
+		'dapovich/anysphere.nvim',
+		lazy = false,
+		opts = {}
+	},
 }
