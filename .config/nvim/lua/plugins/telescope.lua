@@ -51,6 +51,13 @@ return {
 				desc = "Telescope: Find git branches",
 			},
 			{
+				"<leader>fB",
+				function()
+					require("telescope.builtin").buffers()
+				end,
+				desc = "Telescope: buffers",
+			},
+			{
 				"<leader>fc",
 				function()
 					require("telescope.builtin").colorscheme()

@@ -19,7 +19,6 @@ return {
 		main = "ibl",
 		---@module "ibl"
 		---@type ibl.config,
-		--[[ 	 ]]
 		opts = {},
 	},
 	{
@@ -79,9 +78,9 @@ return {
 	{ "akinsho/git-conflict.nvim", opts = {} },
 	{
 		"tpope/vim-fugitive",
-		keys = {
-			{ "<C-G><C-G>", ":Git<CR>", desc = "Open Git menu" },
-		},
+		config = function()
+			vim.keymap.set("n", "<C-G><C-G>", ":Git<CR>", { desc = "Open Git menu" })
+		end,
 	},
 	{
 		"ray-x/lsp_signature.nvim",
@@ -118,7 +117,16 @@ return {
 	},
 
 	"tpope/vim-repeat",
-	{ "numToStr/Comment.nvim", config = true },
+	{
+		"numToStr/Comment.nvim",
+		config = function(_, opts)
+			require("Comment").setup(opts)
+
+			local ft = require("Comment.ft")
+
+			ft.env = "#s"
+		end,
+	},
 	-- YAML
 	{
 		"stephpy/vim-yaml",
@@ -142,6 +150,7 @@ return {
 				function()
 					require("conform").format()
 				end,
+				desc = "Fix it",
 			},
 		},
 	},
@@ -198,6 +207,49 @@ return {
 		end,
 	},
 	{
+		"coder/claudecode.nvim",
+		dependencies = { "folke/snacks.nvim" },
+		opts = {
+			terminal_cmd = "~/.local/bin/claude", -- Point to local installation
+		},
+		config = true,
+		cmd = {
+			"ClaudeCode",
+			"ClaudeCodeFocus",
+			"ClaudeCodeSelectModel",
+			"ClaudeCodeAdd",
+			"ClaudeCodeSend",
+			"ClaudeCodeTreeAdd",
+			"ClaudeCodeStatus",
+			"ClaudeCodeStart",
+			"ClaudeCodeStop",
+			"ClaudeCodeOpen",
+			"ClaudeCodeClose",
+			"ClaudeCodeDiffAccept",
+			"ClaudeCodeDiffDeny",
+			"ClaudeCodeCloseAllDiffs",
+		},
+		keys = {
+			{ "<leader>a", nil, desc = "AI/Claude Code" },
+			{ "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+			{ "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
+			{ "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
+			{ "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+			{ "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
+			{ "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
+			{ "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+			{
+				"<leader>as",
+				"<cmd>ClaudeCodeTreeAdd<cr>",
+				desc = "Add file",
+				ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw", "snacks_picker_list" },
+			},
+			-- Diff management
+			{ "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+			{ "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
+		},
+	},
+	{
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {},
@@ -217,5 +269,36 @@ return {
 				desc = "Next todo comment",
 			},
 		},
+	},
+	{
+		"rcarriga/nvim-notify",
+		config = function(_, opts)
+			require("notify").setup(opts)
+
+			vim.notify = require("notify")
+		end,
+	},
+	{
+		"dmmulroy/tsc.nvim",
+		dependencies = { "rcarriga/nvim-notify" },
+		opts = {
+			use_trouble_qflist = true,
+		},
+	},
+	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {},
+	},
+	{
+		"rlane/pounce.nvim",
+		config = function(_, opts)
+			local pounce = require("pounce")
+			pounce.setup(opts)
+
+			local map = vim.keymap.set
+
+			map({ "n", "x" }, "s", pounce.pounce)
+		end,
 	},
 }

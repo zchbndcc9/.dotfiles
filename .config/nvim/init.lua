@@ -3,4 +3,4 @@ require("options")
 require("mappings")
 require("config.lazy")
 
-vim.cmd([[colorscheme catppuccin-mocha]])
+vim.cmd([[colorscheme kanagawa]])

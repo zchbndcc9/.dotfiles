@@ -24,14 +24,13 @@ return {
 		opts = {},
 	},
 	{
-		'ydkulks/cursor-dark.nvim',
+		"EdenEast/nightfox.nvim",
+	},
+	"yorumicolors/yorumi.nvim",
+	"rebelot/kanagawa.nvim",
+	{
+		"wadackel/vim-dogrun",
 		lazy = false,
 		priority = 1000,
-		opts = {}
-	},
-	{
-		'dapovich/anysphere.nvim',
-		lazy = false,
-		opts = {}
 	},
 }

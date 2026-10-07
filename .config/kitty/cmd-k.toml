@@ -1,0 +1,8 @@
+[default]
+tab_title = "{repo} ({branch})"
+layout = "splits"
+
+[[default.panes]]
+title = "main"
+cwd = "{path}"
+command = "tmux new-session -A -s {repo}-{basename}"

@@ -35,44 +35,46 @@ return {
 			vim.g.no_plugin_maps = true
 		end,
 		opts = {
+			move = {
+				set_jumps = true,
+			},
 			select = {
-				enable = true,
 				lookahead = true,
-				keymaps = {
-					["af"] = "@function.outer",
-					["if"] = "@function.inner",
-					["ac"] = "@class.outer",
-					["ic"] = "@class.inner",
+				selection_modes = {
+					["@parameter.outer"] = "v", -- charwise
+					["@function.outer"] = "V", -- linewise
 				},
 			},
-			-- 			-- 	move = {
-			-- 			-- 		enable = true,
-			-- 			-- 		set_jumps = true, -- whether to set jumps in the jumplist
-			-- 			-- 		goto_next_start = {
-			-- 			-- 			["]m"] = "@function.outer",
-			-- 			-- 			["]]"] = "@class.outer",
-			-- 			-- 		},
-			-- 			-- 		goto_next_end = {
-			-- 			-- 			["]M"] = "@function.outer",
-			-- 			-- 			["]["] = "@class.outer",
-			-- 			-- 		},
-			-- 			-- 		goto_previous_start = {
-			-- 			-- 			["[m"] = "@function.outer",
-			-- 			-- 			["[["] = "@class.outer",
-			-- 			-- 		},
-			-- 			-- 		goto_previous_end = {
-			-- 			-- 			["[M"] = "@function.outer",
-			-- 			-- 			["[]"] = "@class.outer",
-			-- 			-- 		},
-			-- 			-- 	},
-			-- 			-- 	lsp_interop = {
-			-- 			-- 		enable = true,
-			-- 			-- 		border = "none",
-			-- 			-- 		peek_definition_code = {
-			-- 			-- 			["<leader>df"] = "@function.outer",
-			-- 			-- 			["<leader>dF"] = "@class.outer",
-			-- 			-- 		},
-			-- 			-- 	},
 		},
+		config = function(_plugin, opts)
+			local select = require("nvim-treesitter-textobjects.select").select_textobject
+			local move = require("nvim-treesitter-textobjects.move")
+
+			require("nvim-treesitter-textobjects").setup(opts)
+
+			vim.keymap.set({ "x", "o" }, "aF", function()
+				select("@function.outer", "textobjects")
+			end, { desc = "FUNCTION" })
+
+			vim.keymap.set({ "x", "o" }, "af", function()
+				select("@function.inner", "textobjects")
+			end, { desc = "function" })
+
+			vim.keymap.set({ "n", "x", "o" }, "]m", function()
+				move.goto_next_start("@function.outer", "textobjects")
+			end, { desc = "next function" })
+
+			vim.keymap.set({ "n", "x", "o" }, "]M", function()
+				move.goto_next_end("@function.outer", "textobjects")
+			end, { desc = "next function end" })
+
+			vim.keymap.set({ "n", "x", "o" }, "[m", function()
+				move.goto_previous_start("@function.outer", "textobjects")
+			end, { desc = "previous function" })
+
+			vim.keymap.set({ "n", "x", "o" }, "[M", function()
+				move.goto_previous_end("@function.outer", "textobjects")
+			end, { desc = "previous function end" })
+		end,
 	},
 }

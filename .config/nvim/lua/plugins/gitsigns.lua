@@ -7,40 +7,36 @@ return {
 				local vim = vim
 				local map = require("utils.map")
 
-				local gs = package.loaded.gitsigns
+				local gitsigns = require("gitsigns")
 
 				map.n("[c", function()
 					if vim.wo.diff then
-						return "[c"
+						vim.cmd.normal({ "[c", bang = true })
+					else
+						gitsigns.nav_hunk("prev")
 					end
-					vim.schedule(function()
-						gs.prev_hunk()
-					end)
-					return "<Ignore>"
-				end, { expr = true, buffer = bufnr, desc = "Gitsigns: Previous hunk" })
+				end, { expr = true, buffer = bufnr, desc = "Previous hunk" })
 
 				map.n("]c", function()
 					if vim.wo.diff then
-						return "]c"
+						vim.cmd.normal({ "]c", bang = true })
+					else
+						gitsigns.nav_hunk("next")
 					end
-					vim.schedule(function()
-						gs.next_hunk()
-					end)
-					return "<Ignore>"
-				end, { expr = true, buffer = bufnr, desc = "Gitsigns: Next hunk" })
+				end, { expr = true, buffer = bufnr, desc = "Next hunk" })
 
-				map.n("<leader>hs", gs.stage_hunk, { buffer = bufnr, desc = "Gitsigns: Stage hunk" })
-				map.n("<leader>hu", gs.undo_stage_hunk, { buffer = bufnr, desc = "Gitsigns: Unstage hunk" })
-				map.n("<leader>hp", gs.preview_hunk, { buffer = bufnr, desc = "Gitsigns: Preview hunk" })
+				map.n("<leader>hs", gitsigns.stage_hunk, { buffer = bufnr, desc = "Stage/Unstage hunk" })
+				map.n("<leader>hp", gitsigns.preview_hunk, { buffer = bufnr, desc = "Preview hunk" })
+				map.n("<leader>hr", gitsigns.reset_hunk, { buffer = bufnr, desc = "Reset hunk" })
 
 				map.n("<leader>hb", function()
-					gs.blame_line({ full = true })
-				end, { buffer = bufnr, desc = "Gitsigns: Blame line" })
-				map.n("<leader>tb", gs.toggle_current_line_blame, { buffer = bufnr })
+					gitsigns.blame_line({ full = true })
+				end, { buffer = bufnr, desc = "Blame line" })
+				map.n("<leader>tb", gitsigns.toggle_current_line_blame, { buffer = bufnr })
 
-				map.n("<leader>hd", gs.diffthis, { buffer = bufnr, desc = "Gitsigns: View diff" })
+				map.n("<leader>hd", gitsigns.diffthis, { buffer = bufnr, desc = "View diff" })
 				map.n("<leader>hD", function()
-					gs.diffthis("~")
+					gitsigns.diffthis("~")
 				end, { buffer = bufnr })
 			end,
 		},

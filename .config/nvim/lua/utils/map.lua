@@ -11,5 +11,6 @@ end
 M.n = create_map('n')
 M.v = create_map('v')
 M.i = create_map('i')
+M.t = create_map('t')
 
 return M
