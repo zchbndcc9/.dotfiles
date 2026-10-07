@@ -1,23 +1,45 @@
-# Instructions
+# Dotfiles
 
-1. Download brew
+Bare git repo: git dir `~/.cfg`, work tree `~`. Managed with [dotbare](https://github.com/kazhala/dotbare).
+
+## New Mac
+
 ```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+curl -fsSL https://raw.githubusercontent.com/zchbndcc9/.dotfiles/master/.setup.zsh | zsh
+exec zsh
 ```
 
-3. Download fzf, gh, and dotbare
-```sh
-brew install dotbare fzf gh
+Safe to re-run (`~/.setup.zsh`). It installs Xcode CLT and Homebrew if missing, clones this
+repo into `~/.cfg` and checks it out into `~` (pre-existing files are moved to
+`~/.dotfiles-backup/`), runs `brew bundle`, installs the kitty cmd+k kitten, and logs in to `gh`.
 
+## Staying in sync
+
+```sh
+dotsync                 # pull, commit tracked changes, push
+dotsync "msg"           # same, with a commit message
+rebundle-brew           # dump installed brew packages to ~/Brewfile, commit + push
 ```
 
-4. Initialize this repo with dotbare
+On another machine, `dotsync` pulls, then `brew bundle --file=~/Brewfile` installs anything new.
+
+dotbare works like git for the dotfiles repo:
+
 ```sh
-dotbare finit -u git@github.com:zchbndcc9/.dotfiles.git
+dotbare status
+dotbare fedit           # fzf-pick a tracked file to edit
+dotbare fadd            # fzf-pick changed files to stage
+dotbare commit -m "..." && dotbare push
 ```
 
-5. Run install script
+## Tracking a new file
+
+Untracked files are hidden (`status.showUntrackedFiles no`), so add new files explicitly:
+
 ```sh
-~/.setup.zsh
+dotbare add ~/.config/foo/config
+dotbare commit -m "Track foo config"
+dotbare push            # or just: dotsync
 ```
 
+Never track secrets (tokens, `.env`, `~/.config/gh/hosts.yml`).

@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+# Pull dotfiles, then commit + push any local changes to tracked files.
+#   dotsync ["commit message"]
+set -euo pipefail
+
+dot() { git --git-dir="$HOME/.cfg" --work-tree="$HOME" "$@"; }
+
+dot pull --rebase --autostash origin master
+
+if ! dot diff --quiet HEAD; then
+  dot status --short --untracked-files=no
+  dot add -u
+  dot commit -m "${1:-Sync dotfiles from $(hostname -s)}"
+fi
+
+dot push origin master
